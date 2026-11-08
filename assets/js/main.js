@@ -141,33 +141,53 @@ function veSanPham(page) {
     curitem.forEach(product => {
         const card = document.createElement('div');
         card.className = 'shop-card';
+        card.style.cursor = 'pointer';
+        
+        card.setAttribute('data-id', product.id);
+        
+        card.addEventListener('click', function(e) {
+            const productId = this.getAttribute('data-id'); // sau nay co chi tiet san pham thi lay id nay de chieu
+        });
 
         const imgBox = document.createElement('div');
+        imgBox.className = 'shop-card__img-box';
         
         const img = document.createElement('img');
         img.src = product.imageUrl;
         img.alt = product.name;
         img.className = 'shop-card__img';
         
-        const contactBtn = document.createElement('a');
-        contactBtn.href = '#';
-        contactBtn.className = 'shop-card__contact-btn';
-        contactBtn.textContent = 'Liên hệ';
+        const cartBtn = document.createElement('button');
+        cartBtn.className = 'shop-card__cart-btn';
+        cartBtn.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
+        cartBtn.addEventListener('click', function(e) {
+            // bam vao them vao vo hang
+        });
         
         imgBox.appendChild(img);
-        imgBox.appendChild(contactBtn);
+        imgBox.appendChild(cartBtn);
         
+        const infoBox = document.createElement('div');
+        infoBox.className = 'shop-card__info';
+
         const title = document.createElement('h3');
         title.className = 'shop-card__title';
         title.textContent = product.name;
         
-        const price = document.createElement('div');
-        price.className = 'shop-card__price';
-        price.textContent = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
+        const priceBox = document.createElement('div');
+        priceBox.className = 'shop-card__price-box';
+
+        const currentPrice = document.createElement('span');
+        currentPrice.className = 'shop-card__current-price';
+        currentPrice.textContent = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
+
+        priceBox.appendChild(currentPrice);
+
+        infoBox.appendChild(title);
+        infoBox.appendChild(priceBox);
         
         card.appendChild(imgBox);
-        card.appendChild(title);
-        card.appendChild(price);
+        card.appendChild(infoBox);
         
         container.appendChild(card);
     });
