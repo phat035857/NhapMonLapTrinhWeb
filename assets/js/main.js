@@ -210,7 +210,7 @@ function veTungTrang() {
         button.textContent = i;
         
         button.addEventListener('click', function(e) {
-            curpage = Number(e.target.getAttribute('data-page'));
+            curpage = Number(button.getAttribute('data-page'));
             veSanPham(curpage);
             veTungTrang();
         });
