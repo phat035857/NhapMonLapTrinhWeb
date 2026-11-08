@@ -7,6 +7,12 @@ const sortSelect = document.querySelector('#sortSelect');
 const categoryLinks = document.querySelectorAll('.header__nav-link[data-category]');
 const pageTitle = document.querySelector('#pageTitle');
 const resultCount = document.querySelector('#resultCount');
+const loginUser = document.querySelector(".header__navform--login");
+
+loginUser.addEventListener('click', function(){
+    window.location.href = 'login.html';
+})
+
 
 let curpage = 1;
 const itemperpage = 9;
@@ -145,8 +151,8 @@ function veSanPham(page) {
         
         card.setAttribute('data-id', product.id);
         
-        card.addEventListener('click', function(e) {
-            const productId = this.getAttribute('data-id'); // sau nay co chi tiet san pham thi lay id nay de chieu
+        card.addEventListener('click', function() {
+            const productId = card.getAttribute('data-id'); // sau nay co chi tiet san pham thi lay id nay de chieu
         });
 
         const imgBox = document.createElement('div');
@@ -160,7 +166,7 @@ function veSanPham(page) {
         const cartBtn = document.createElement('button');
         cartBtn.className = 'shop-card__cart-btn';
         cartBtn.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
-        cartBtn.addEventListener('click', function(e) {
+        cartBtn.addEventListener('click', function() {
             // bam vao them vao vo hang
         });
         

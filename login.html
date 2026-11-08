@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="assets/css/login.css">
+
+    <link rel="icon" href="assets/image/logo - Copy.jpg" type="image/jpg" />
+
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Ban Kinh</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <a href="index.html">
+                <img src="assets/image/logo.jpg" alt="logo" />
+            </a>
+        </div>
+        <div class="header__navform">
+            <nav class="header__navform--nav">
+                <li><a href="shop.html" class="header__nav-link" data-category="gong-kinh">Gọng kính</a></li>
+                <li><a href="shop.html" class="header__nav-link" data-category="trong-kinh">Tròng kính</a></li>
+                <li><a href="shop.html" class="header__nav-link" data-category="kinh-mat">Kính mát</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+            </nav>
+            <form class="header__navform--form">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </form>
+            <div class="header__navform--login">
+                <i class="fa-regular fa-circle-user"></i>
+            </div>
+        </div>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <main class="auth-container">
+    <h1 class="auth-title">Đăng nhập</h1>
+
+    <div class="auth-grid">
+        <!-- Cột bên trái: Form Đăng nhập -->
+        <section class="auth-section login-box">
+            <form action="#" method="POST" id="loginForm">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Tài khoản/Email*" required>
+                </div>
+
+                <div class="form-group password-group">
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Mật khẩu*" required>
+                    <span class="eye-toggle" onclick="togglePasswordVisibility()">
+                        <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                    </span>
+                </div>
+
+                <div class="form-meta">
+                    <label class="remember-label">
+                        <input type="checkbox" name="remember"> Ghi nhớ
+                    </label>
+                    <a href="#" class="forgot-link">Quên mật khẩu</a>
+                </div>
+
+                <button type="submit" class="btn-submit">Đăng nhập</button>
+            </form>
+        </section>
+
+        <!-- Đường gạch phân cách giữa 2 phần -->
+        <div class="divider"></div>
+
+        <!-- Cột bên phải: Đăng ký ngay -->
+        <section class="auth-section register-box">
+            <h2 class="register-heading">Đăng ký ngay</h2>
+            <p class="register-text">
+                Hãy tham gia ngay hôm nay để tận hưởng các quyền lợi độc quyền, ưu đãi hấp dẫn và những trải nghiệm được cá nhân hóa dành riêng cho bạn.
+            </p>
+            <a href="#" class="btn-submit btn-register">Đăng ký ngay</a>
+        </section>
+    </div>
+</main>
+
+
+
+     <footer class="footer">
+        <div class="footer-container">
+            <div class="footer__gioithieu">
+                <img src="assets/image/logo-kobackground.png" alt="logo" class=" footer__logo">
+                <p class="footer-mota">
+                    Tự hào là một trong những doanh nghiệp mắt kính lớn nhất và lâu đời nhất tại Sài Gòn, với đội ngũ
+                    KTV và nhân viên nhiệt tình phục vụ quý khách.
+                </p>
+                <div class="footer__mangxahoi">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer__lienhe">
+                <h4 class="footer__h4">THÔNG TIN LIÊN HỆ</h4>
+                <div class="footer__tblienhe">
+                    <p>Điện thoại: 0358576625</p>
+                    <p>Email: phat035857@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer__sanpham">
+                <h4 class="footer__h4">DANH MỤC NỔI BẬT</h4>
+                <ul class="footer__danhsach">
+                    <li><a href="#">Tròng kính</a></li>
+                    <li><a href="#">Kính gọng</a></li>
+                    <li><a href="#">Kính mát</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/login.js"></script>
+
+</body>
+</html>

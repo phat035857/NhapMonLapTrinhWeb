@@ -8,6 +8,20 @@
     font-optical-sizing: auto;
 }
 
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
 /* Start header  */
 
 .header {
@@ -340,6 +354,8 @@
 
 
 /* Start Footer */
+
+
 
 .footer {
     background-color: #EAEEF0;
