@@ -12,3 +12,4 @@ function togglePasswordVisibility() {
         eyeIcon.classList.add('fa-eye');
     }
 }
+
