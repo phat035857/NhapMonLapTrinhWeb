@@ -1,0 +1,131 @@
+/* Container chính chứa toàn bộ phần login/register */
+.auth-container {
+    max-width: 1050px;
+    margin: 50px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Tiêu đề "Đăng nhập" font Serif cổ điển */
+.auth-title {
+    font-family: 'Georgia', serif;
+    font-size: 36px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: #2c2c2c;
+}
+
+/* Layout dạng Lưới 2 cột cân bằng */
+.auth-grid {
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.auth-section {
+    flex: 1;
+}
+
+/* Form Đăng nhập bên trái */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-input {
+    width: 100%;
+    height: 48px;
+    padding: 10px 15px;
+    border: 1px solid #e1e1e1;
+    border-radius: 2px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus {
+    border-color: #36c6c6;
+}
+
+/* Ô nhập mật khẩu có chứa biểu tượng con mắt */
+.password-group {
+    position: relative;
+}
+
+.eye-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    font-size: 16px;
+}
+
+/* Hàng chọn "Ghi nhớ" và "Quên mật khẩu" */
+.form-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.remember-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #555;
+}
+
+.forgot-link {
+    color: #333;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+/* Nút bấm tổng quát (Xanh ngọc đặc trưng) */
+.btn-submit {
+    display: inline-block;
+    background-color: #36c6c6;
+    color: #ffffff;
+    border: none;
+    padding: 12px 36px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-submit:hover {
+    background-color: #2bb3b3;
+}
+
+/* Đường vạch ngăn giữa 2 cột */
+.divider {
+    width: 1px;
+    background-color: #ebebeb;
+    align-self: stretch;
+}
+
+/* Phần Đăng ký bên phải */
+.register-heading {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.register-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 30px;
+}
