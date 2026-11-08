@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="icon" href="assets/image/logo - Copy.jpg" type="image/jpg" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Ban Kinh</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__logo">
+            <a href="index.html">
+                <img src="assets/image/logo.jpg" alt="logo" />
+            </a>
+        </div>
+        <div class="header__navform">
+            <nav class="header__navform--nav">
+                <li><a href="shop.html" class="header__nav-link" data-category="gong-kinh">Gọng kính</a></li>
+                <li><a href="shop.html" class="header__nav-link" data-category="trong-kinh">Tròng kính</a></li>
+                <li><a href="shop.html" class="header__nav-link" data-category="kinh-mat">Kính mát</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+            </nav>
+            <form class="header__navform--form">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </form>
+            <div class="header__navform--login">
+                <i class="fa-regular fa-circle-user"></i>
+            </div>
+        </div>
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="section1">
+            <img src="https://kinhmatanna.com/_next/image?url=https%3A%2F%2Fapi.kinhmatanna.com%2Fmedia%2Fanna-media%2Fpublic%2F2026%2F09%2F01a0cc32-f5f9-7122-ab1c-ba8105070f52.jpg&w=1920&q=75"
+                alt="gong kinh">
+        </section>
+        <section class="section2">
+            <div class="shop-header">
+                <h1 id="pageTitle">Gọng kính</h1>
+                <div class="shop-toolbar">
+                    <div class="toolbar-left">
+                        <span id="resultCount">Hiển thị 0 kết quả.</span>
+                    </div>
+                    <div class="toolbar-right">
+                        <select id="sortSelect" class="sort">
+                            <option value="default">Sắp xếp theo: Nổi bật</option>
+                            <option value="price-asc">Giá: Thấp đến Cao</option>
+                            <option value="price-desc">Giá: Cao đến Thấp</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="product-list" class="shop-grid"></div>
+            <div id="pagination" class="pagination-container"></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer__gioithieu">
+                <img src="assets/image/logo-kobackground.png" alt="logo" class=" footer__logo">
+                <p class="footer-mota">
+                    Sản phẩm được thực hiện bởi nhóm sinh viên Đại học Cần Thơ.
+                </p>
+                <div class="footer__mangxahoi">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer__lienhe">
+                <h4 class="footer__h4">THÔNG TIN LIÊN HỆ</h4>
+                <div class="footer__tblienhe">
+                    <p>Điện thoại: 0358576625</p>
+                    <p>Email: phat035857@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer__sanpham">
+                <h4 class="footer__h4">DANH MỤC NỔI BẬT</h4>
+                <ul class="footer__danhsach">
+                    <li><a href="#">Tròng kính</a></li>
+                    <li><a href="#">Kính gọng</a></li>
+                    <li><a href="#">Kính mát</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

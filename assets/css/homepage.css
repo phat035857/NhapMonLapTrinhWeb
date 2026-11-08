@@ -1,0 +1,522 @@
+
+/* =================================
+   MAT KINH AN PHAT
+   
+================================= */
+
+/* CAI DAT CHUNG */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Nunito Sans', sans-serif;
+    color: #292929;
+    background-color: #f0f6fa;
+}
+
+a {
+    text-decoration: none;
+    color: #547a9b;
+}
+
+img {
+    max-width: 100%;
+}
+
+main {
+    width: 95%;
+    max-width: 1600px;
+    margin: 35px auto;
+}
+
+
+#hero h1,
+#danh-muc h2,
+#san-pham h2,
+#ly-do-chon-an-phat h2 {
+    font-family: 'Lora', serif;
+    font-weight: 600;
+}
+
+/* =================================
+   HEADER
+================================= */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    padding: 18px 5%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dce6ee;
+}
+
+/* Logo */
+
+.logo,
+header > a:first-child {
+    color: #547a9b;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.logo span {
+    display: block;
+    margin-top: 3px;
+    color: #789bb8;
+    font-size: 10px;
+    font-weight: normal;
+    letter-spacing: 3px;
+}
+
+/* Neu dung anh logo */
+
+header > a:first-child img {
+    display: block;
+    width: 150px;
+    height: auto;
+}
+
+/* Form tim kiem */
+
+header form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header label {
+    font-size: 14px;
+    color: #555555;
+    white-space: nowrap;
+}
+
+header input {
+    width: 250px;
+    padding: 11px 13px;
+    font-size: 14px;
+    border: 1px solid #d5e2ec;
+    border-radius: 5px;
+}
+
+header button {
+    padding: 11px 18px;
+    color: #ffffff;
+    background-color: #547a9b;
+    border: 1px solid #547a9b;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Gio hang */
+
+header > a:last-child {
+    display: inline-block;
+    padding: 11px 17px;
+    border: 1px solid #547a9b;
+    border-radius: 5px;
+    color: #547a9b;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+
+/* =================================
+   NAVIGATION
+================================= */
+
+nav {
+    background-color: #ffffff;
+    /* border-bottom: 1px solid #dce6ee; */
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 65px;
+    list-style: none;
+    margin: 0;
+    padding: 17px 20px;
+}
+
+nav a {
+    color: #292929;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* =================================
+   HERO SECTION
+================================= */
+
+#hero {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 45px;
+    padding: 48px;
+    margin-bottom: 70px;
+    background-color: #e5eff6;
+    border-radius: 10px;
+}
+
+/* Noi dung Hero */
+
+.hero-content {
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Nhan bo suu tap */
+
+.hero-label {
+    margin-bottom: 15px;
+    color: #789bb8;
+    font-family: 'Lora', serif;
+    font-size: 15px;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 1.5px;
+}
+
+/* Tieu de chinh */
+
+#hero h1 {
+    margin: 0 0 18px;
+    color: #426f91;
+    font-family: 'Lora', serif;
+    font-size: 44px;
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* Doan mo ta */
+
+.hero-description {
+    margin-bottom: 25px;
+    color: #555555;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
+}
+
+/* Nut kham pha */
+
+.hero-content > a {
+    display: inline-block;
+    padding: 13px 21px;
+    color: #ffffff;
+    background-color: #547a9b;
+    border-radius: 5px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+/* Hinh anh */
+
+#hero img {
+    display: block;
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    object-position: center 35%;
+    border-radius: 8px;
+}
+
+
+
+/* =================================
+   DANH MUC SAN PHAM
+================================= */
+
+#danh-muc {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 18px;
+    margin-bottom: 65px;
+}
+
+#danh-muc h2 {
+    grid-column: 1 / -1;
+    margin: 0 0 5px;
+    color: #426f91;
+    font-size: 26px;
+}
+
+#danh-muc article {
+    padding: 0;
+    background-color: transparent;
+}
+
+#danh-muc article img {
+    display: block;
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 13px;
+}
+
+#danh-muc h3 {
+    margin: 0 0 5px;
+    color: #292929;
+    font-size: 18px;
+}
+
+#danh-muc article p {
+    margin: 0;
+    color: #707070;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =================================
+   SAN PHAM BAN CHAY
+   Kich thuoc giong danh muc
+   Them gia va nut xem chi tiet
+================================= */
+
+#san-pham {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 18px;
+    margin-bottom: 65px;
+}
+
+#san-pham h2 {
+    grid-column: 1 / -1;
+    margin: 0 0 5px;
+    color: #426f91;
+    font-size: 26px;
+}
+
+#san-pham article {
+    padding: 0;
+    background-color: transparent;
+}
+
+#san-pham figure {
+    margin: 0;
+}
+
+#san-pham article img {
+    display: block;
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 13px;
+}
+
+#san-pham figcaption {
+    color: #292929;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#san-pham article p {
+    margin: 0 0 12px;
+    color: #547a9b;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#san-pham article > a {
+    display: inline-block;
+    padding: 9px 15px;
+    color: #ffffff;
+    background-color: #547a9b;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+/* =================================
+   WHY CHOOSE US
+================================= */
+
+#ly-do-chon-an-phat {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+/* Tieu de chinh */
+
+#ly-do-chon-an-phat h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 10px;
+    color: #426f91;
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* The noi dung */
+
+#ly-do-chon-an-phat article {
+    padding: 25px;
+    background-color: #ffffff;
+    border: 1px solid #dce6ee;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px #0000000d;
+}
+
+/* Tieu de ly do */
+
+#ly-do-chon-an-phat h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #426f91;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Mo ta ly do */
+
+#ly-do-chon-an-phat p {
+    margin-bottom: 0;
+    color: #707070;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* =================================
+   FOOTER
+================================= */
+
+footer {
+    padding: 40px 5%;
+    color: #f4f0e8;
+    background-color: #426f91;
+    text-align: center;
+}
+
+footer h2 {
+    margin-top: 0;
+    color: #f4e9d8;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+footer p {
+    margin: 9px 0;
+    color: #e1e5e1;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media screen and (max-width: 850px) {
+
+    header {
+        flex-wrap: wrap;
+    }
+
+    header form {
+        order: 3;
+        width: 100%;
+    }
+
+    header input {
+        flex: 1;
+        width: auto;
+    }
+
+    nav ul {
+        gap: 30px;
+    }
+
+    #hero {
+        gap: 25px;
+        padding: 28px;
+    }
+
+    #hero h1 {
+        font-size: 34px;
+    }
+
+    #hero img {
+        height: 340px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    main {
+        width: 92%;
+        margin-top: 22px;
+    }
+
+    header {
+        gap: 15px;
+        padding: 15px 4%;
+    }
+
+    header label {
+        display: none;
+    }
+
+    header input {
+        min-width: 0;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 15px 24px;
+        padding: 14px 10px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    #hero {
+        grid-template-columns: 1fr;
+        padding: 22px 18px;
+        gap: 20px;
+    }
+
+    #hero h1 {
+        font-size: 30px;
+    }
+
+    #hero img {
+        height: 250px;
+    }
+
+    #danh-muc,
+    #san-pham {
+        column-gap: 24px;
+        row-gap: 32px;
+        grid-template-columns: 1fr;
+    }
+
+    #danh-muc article img,
+    #san-pham article img {
+        height: 230px;
+    }
+}
