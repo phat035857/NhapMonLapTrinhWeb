@@ -89,7 +89,8 @@ categoryLinks.forEach(link => {
         localStorage.setItem('selectedCategory', category);
         if (container) {
             link.preventDefault();
-            
+            if (pageTitle) pageTitle.textContent = link.textContent;
+
             const category = link.getAttribute('data-category');
 
             bProducts = baseProducts.filter(product => product.category == category);
@@ -192,8 +193,6 @@ function veTungTrang() {
             curpage = Number(e.target.getAttribute('data-page'));
             veSanPham(curpage);
             veTungTrang();
-            
-            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
         
         paginationBox.appendChild(button);
