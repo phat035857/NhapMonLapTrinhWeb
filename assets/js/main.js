@@ -62,19 +62,35 @@ if (carousel) {
     }, 5000);
 }
 
-let bProducts = baseProducts.filter(product => product.category == 'gong-kinh');
+const savedCategory = localStorage.getItem('selectedCategory') || '';
+
+let bProducts;
+if(savedCategory == ''){
+    bProducts = [...baseProducts];
+}else{
+    bProducts = baseProducts.filter(product => product.category === savedCategory);
+}
 let originalOrder = [...bProducts];
 
+if (pageTitle) {
+    if (savedCategory !== '') {
+        const activeLink = document.querySelector(`.header__nav-link[data-category="${savedCategory}"]`);
+        if (activeLink) {
+            pageTitle.textContent = activeLink.textContent;
+        }
+    } else {
+        pageTitle.textContent = "Tất cả sản phẩm";
+    }
+}
+
 categoryLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    link.addEventListener('click', function() {
+        const category = link.getAttribute('data-category');
+        localStorage.setItem('selectedCategory', category);
         if (container) {
-            e.preventDefault();
-            
-            categoryLinks.forEach(item => item.classList.remove('active'));
-            link.classList.add('active');
+            link.preventDefault();
             
             const category = link.getAttribute('data-category');
-            if (pageTitle) pageTitle.textContent = link.textContent;
 
             bProducts = baseProducts.filter(product => product.category == category);
             originalOrder = [...bProducts];
