@@ -1,231 +1,182 @@
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('.header__navform');
-const container = document.querySelector('#product-list');
-const paginationBox = document.querySelector('#pagination');
-const carousel = document.querySelector('.carousel');
-const sortSelect = document.querySelector('#sortSelect');
-const categoryLinks = document.querySelectorAll('.header__nav-link[data-category]');
-const pageTitle = document.querySelector('#pageTitle');
-const resultCount = document.querySelector('#resultCount');
-const loginUser = document.querySelector(".header__navform--login");
+const nutMenu = document.querySelector('.hamburger');
+const thanhDieuHuong = document.querySelector('.header__navform');
+const khungSanPham = document.querySelector('#product-list');
+const khungTrinhChieu = document.querySelector('.carousel');
+const cacLienKetDanhMuc = document.querySelectorAll('a[data-category]');
+const tieuDeTrang = document.querySelector('#pageTitle');
 
-loginUser.addEventListener('click', function(){
-    window.location.href = 'login.html';
-})
+const danhMucDaLuu = localStorage.getItem('selectedCategory') || '';
+let danhSachSanPham = [];
+let viTriSlideHienTai = 0;
+let danhSachSlide = [];
+let danhSachNutSlide = [];
 
 
-let curpage = 1;
-const itemperpage = 9;
-
-hamburger.addEventListener('click', mobileMenu);
-
-function mobileMenu() {
-    nav.classList.toggle('active--ham');
+function batTatMenuDienThoai() {
+    thanhDieuHuong.classList.toggle('active--ham');
 }
 
-if (carousel) {
-    const items = carousel.querySelectorAll('.carousel__item');
-    
-    const navDiv = document.createElement('div');
-    navDiv.className = 'carousel__nav';
-    
-    for (let i = 0; i < items.length; i++) {
-        const span = document.createElement('span');
-        span.className = 'carousel__button';
-        navDiv.appendChild(span);
+function chuyenSlide(viTri) {
+    for (let i = 0; i < danhSachSlide.length; i++) {
+        danhSachSlide[i].classList.remove('carousel__item--selected');
+        danhSachNutSlide[i].classList.remove('carousel__button--selected');
     }
-    carousel.appendChild(navDiv);
+    danhSachSlide[viTri].classList.add('carousel__item--selected');
+    danhSachNutSlide[viTri].classList.add('carousel__button--selected');
+}
 
-    const buttons = carousel.querySelectorAll('.carousel__button');
+function xuLyBamNutSlide(suKien) {
+    viTriSlideHienTai = Number(suKien.currentTarget.getAttribute('data-index'));
+    chuyenSlide(viTriSlideHienTai);
+}
 
-    items[0].classList.add('carousel__item--selected');
-    buttons[0].classList.add('carousel__item--selected');
+function tuDongChuyenSlide() {
+    viTriSlideHienTai++;
+    if (viTriSlideHienTai >= danhSachSlide.length) {
+        viTriSlideHienTai = 0;
+    }
+    chuyenSlide(viTriSlideHienTai);
+}
 
-    let currentIndex = 0;
+function khoiTaoTrinhChieu() {
+    if (!khungTrinhChieu) return;
 
-    function chuyenSlide(index) {
-        for (let j = 0; j < items.length; j++) {
-            items[j].classList.remove('carousel__item--selected');
-            buttons[j].classList.remove('carousel__button--selected');
-        }
-        items[index].classList.add('carousel__item--selected');
-        buttons[index].classList.add('carousel__button--selected');
+    danhSachSlide = khungTrinhChieu.querySelectorAll('.carousel__item');
+    const hopNutDieuHuong = document.createElement('div');
+    hopNutDieuHuong.className = 'carousel__nav';
+
+    for (let i = 0; i < danhSachSlide.length; i++) {
+        const nutTron = document.createElement('span');
+        nutTron.className = 'carousel__button';
+        nutTron.setAttribute('data-index', i);
+        nutTron.addEventListener('click', xuLyBamNutSlide);
+        hopNutDieuHuong.appendChild(nutTron);
     }
 
-    buttons.forEach((nutHienTai, viTri) => {
-        nutHienTai.addEventListener('click', function(e) {
-            currentIndex = viTri; 
-            chuyenSlide(currentIndex);
-        });
-    });
+    khungTrinhChieu.appendChild(hopNutDieuHuong);
+    danhSachNutSlide = khungTrinhChieu.querySelectorAll('.carousel__button');
 
-    setInterval(function() {
-        currentIndex++;
-        if (currentIndex >= items.length) {
-            currentIndex = 0;
-        }
-        chuyenSlide(currentIndex);
-    }, 5000);
+    chuyenSlide(0);
+    setInterval(tuDongChuyenSlide, 5000);
 }
 
-const savedCategory = localStorage.getItem('selectedCategory') || '';
-
-let bProducts;
-if(savedCategory == ''){
-    bProducts = [...baseProducts];
-}else{
-    bProducts = baseProducts.filter(product => product.category === savedCategory);
-}
-let originalOrder = [...bProducts];
-
-if (pageTitle) {
-    if (savedCategory !== '') {
-        const activeLink = document.querySelector(`.header__nav-link[data-category="${savedCategory}"]`);
-        if (activeLink) {
-            pageTitle.textContent = activeLink.textContent;
-        }
+function khoiTaoDuLieuSanPham() {
+    if (danhMucDaLuu === '') {
+        danhSachSanPham = [...danhSachSanPhamGoc];
     } else {
-        pageTitle.textContent = "Tất cả sản phẩm";
+        danhSachSanPham = danhSachSanPhamGoc.filter(sanPham => sanPham.danhMuc === danhMucDaLuu);
+    }
+
+    if (tieuDeTrang) {
+        if (danhMucDaLuu !== '') {
+            const lienKetDangChon = document.querySelector(`a[data-category="${danhMucDaLuu}"]`);
+            if (lienKetDangChon) {
+                tieuDeTrang.textContent = lienKetDangChon.textContent;
+            }
+        } else {
+            tieuDeTrang.textContent = "Tất cả sản phẩm";
+        }
     }
 }
 
-categoryLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        const category = link.getAttribute('data-category');
-        localStorage.setItem('selectedCategory', category);
-        if (container) {
-            link.preventDefault();
-            if (pageTitle) pageTitle.textContent = link.textContent;
+function dinhDangGiaTien(giaTien) {
+    return giaTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
+}
 
-            const category = link.getAttribute('data-category');
+function xuLyChonSanPham(suKien) {
+    const maSanPham = suKien.currentTarget.getAttribute('data-id');
+}
 
-            bProducts = baseProducts.filter(product => product.category == category);
-            originalOrder = [...bProducts];
-            
-            if (sortSelect) {
-                sortSelect.value = 'default';
-            }
-            
-            curpage = 1;
-            veSanPham(curpage);
-            veTungTrang();
-        }
+function xuLyThemGioHang(suKien) {
+    suKien.stopPropagation();
+}
+
+function taoTheSanPham(sanPham) {
+    const theSanPham = document.createElement('div');
+    theSanPham.className = 'shop-card';
+    theSanPham.style.cursor = 'pointer';
+    theSanPham.setAttribute('data-id', sanPham.ma);
+    theSanPham.addEventListener('click', xuLyChonSanPham);
+
+    const khungAnh = document.createElement('div');
+    khungAnh.className = 'shop-card__img-box';
+
+    const hinhAnh = document.createElement('img');
+    hinhAnh.src = sanPham.hinhAnh;
+    hinhAnh.alt = sanPham.ten;
+    hinhAnh.className = 'shop-card__img';
+
+    const nutGioHang = document.createElement('button');
+    nutGioHang.className = 'shop-card__cart-btn';
+    nutGioHang.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
+    nutGioHang.addEventListener('click', xuLyThemGioHang);
+
+    khungAnh.appendChild(hinhAnh);
+    khungAnh.appendChild(nutGioHang);
+
+    const khungThongTin = document.createElement('div');
+    khungThongTin.className = 'shop-card__info';
+
+    const tenSanPham = document.createElement('h3');
+    tenSanPham.className = 'shop-card__title';
+    tenSanPham.textContent = sanPham.ten;
+
+    const khungGia = document.createElement('div');
+    khungGia.className = 'shop-card__price-box';
+
+    const giaHienTai = document.createElement('span');
+    giaHienTai.className = 'shop-card__current-price';
+    giaHienTai.textContent = dinhDangGiaTien(sanPham.gia);
+
+    khungGia.appendChild(giaHienTai);
+    khungThongTin.appendChild(tenSanPham);
+    khungThongTin.appendChild(khungGia);
+
+    theSanPham.appendChild(khungAnh);
+    theSanPham.appendChild(khungThongTin);
+
+    return theSanPham;
+}
+
+function veSanPham() {
+    while (khungSanPham.firstChild) {
+        khungSanPham.removeChild(khungSanPham.firstChild);
+    }
+
+    danhSachSanPham.forEach(sanPham => {
+        const theSanPham = taoTheSanPham(sanPham);
+        khungSanPham.appendChild(theSanPham);
     });
+}
+
+function xuLyLocDanhMuc(suKien) {
+    const lienKet = suKien.currentTarget;
+    const danhMuc = lienKet.getAttribute('data-category');
+    localStorage.setItem('selectedCategory', danhMuc);
+
+    if (khungSanPham) {
+        suKien.preventDefault();
+        if (tieuDeTrang) {
+            tieuDeTrang.textContent = lienKet.textContent;
+        }
+
+        danhSachSanPham = danhSachSanPhamGoc.filter(sanPham => sanPham.danhMuc === danhMuc);
+        veSanPham();
+    }
+}
+
+
+if (nutMenu) {
+    nutMenu.addEventListener('click', batTatMenuDienThoai);
+}
+
+khoiTaoTrinhChieu();
+khoiTaoDuLieuSanPham();
+
+cacLienKetDanhMuc.forEach(lienKet => {
+    lienKet.addEventListener('click', xuLyLocDanhMuc);
 });
 
-if (sortSelect) {
-    sortSelect.addEventListener('change', function(e) {
-        const sortType = e.target.value;
-        
-        if (sortType === 'price-asc') {
-            bProducts.sort((a, b) => a.price - b.price);
-        } else if (sortType === 'price-desc') {
-            bProducts.sort((a, b) => b.price - a.price);
-        } else {
-            bProducts = [...originalOrder];
-        }
-        
-        curpage = 1;
-        veSanPham(curpage);
-        veTungTrang();
-    });
-}
-
-function veSanPham(page) {
-    const bd = (page - 1) * itemperpage;
-    const kt = bd + itemperpage;
-    const curitem = bProducts.slice(bd, kt);
-    
-    while (container.firstChild) {
-        container.removeChild(container.firstChild);
-    }
-    
-    if (resultCount) {
-        resultCount.textContent = `Hiển thị ${bProducts.length} kết quả.`;
-    }
-    
-    curitem.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'shop-card';
-        card.style.cursor = 'pointer';
-        
-        card.setAttribute('data-id', product.id);
-        
-        card.addEventListener('click', function() {
-            const productId = card.getAttribute('data-id'); // sau nay co chi tiet san pham thi lay id nay de chieu
-        });
-
-        const imgBox = document.createElement('div');
-        imgBox.className = 'shop-card__img-box';
-        
-        const img = document.createElement('img');
-        img.src = product.imageUrl;
-        img.alt = product.name;
-        img.className = 'shop-card__img';
-        
-        const cartBtn = document.createElement('button');
-        cartBtn.className = 'shop-card__cart-btn';
-        cartBtn.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
-        cartBtn.addEventListener('click', function() {
-            // bam vao them vao vo hang
-        });
-        
-        imgBox.appendChild(img);
-        imgBox.appendChild(cartBtn);
-        
-        const infoBox = document.createElement('div');
-        infoBox.className = 'shop-card__info';
-
-        const title = document.createElement('h3');
-        title.className = 'shop-card__title';
-        title.textContent = product.name;
-        
-        const priceBox = document.createElement('div');
-        priceBox.className = 'shop-card__price-box';
-
-        const currentPrice = document.createElement('span');
-        currentPrice.className = 'shop-card__current-price';
-        currentPrice.textContent = product.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
-
-        priceBox.appendChild(currentPrice);
-
-        infoBox.appendChild(title);
-        infoBox.appendChild(priceBox);
-        
-        card.appendChild(imgBox);
-        card.appendChild(infoBox);
-        
-        container.appendChild(card);
-    });
-}
-
-function veTungTrang() {
-    const sonut = Math.ceil(bProducts.length / itemperpage);
-    
-    while (paginationBox.firstChild) {
-        paginationBox.removeChild(paginationBox.firstChild);
-    }
-    
-    for(let i = 1; i <= sonut; i++) {
-        const button = document.createElement('button');
-        button.className = 'page-btn';
-        if (i === curpage) {
-            button.classList.add('active');
-        }
-        button.setAttribute('data-page', i);
-        button.textContent = i;
-        
-        button.addEventListener('click', function(e) {
-            curpage = Number(button.getAttribute('data-page'));
-            veSanPham(curpage);
-            veTungTrang();
-        });
-        
-        paginationBox.appendChild(button);
-    }
-}
-
-if (container) {
-    veSanPham(curpage);
-    veTungTrang();
+if (khungSanPham) {
+    veSanPham();
 }

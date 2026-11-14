@@ -45,7 +45,7 @@ main {
    HEADER
 ================================= */
 
-header {
+/* header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -53,39 +53,39 @@ header {
     padding: 18px 5%;
     background-color: #ffffff;
     border-bottom: 1px solid #dce6ee;
-}
+} */
 
 /* Logo */
 
-.logo,
+/* .logo,
 header > a:first-child {
     color: #547a9b;
     font-size: 24px;
     font-weight: bold;
     letter-spacing: 1px;
     white-space: nowrap;
-}
+} */
 
-.logo span {
+/* .logo span {
     display: block;
     margin-top: 3px;
     color: #789bb8;
     font-size: 10px;
     font-weight: normal;
     letter-spacing: 3px;
-}
+} */
 
 /* Neu dung anh logo */
 
-header > a:first-child img {
+/* header > a:first-child img {
     display: block;
     width: 150px;
     height: auto;
-}
+} */
 
 /* Form tim kiem */
 
-header form {
+/* header form {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -113,11 +113,11 @@ header button {
     border-radius: 5px;
     font-size: 14px;
     cursor: pointer;
-}
+} */
 
 /* Gio hang */
 
-header > a:last-child {
+/* header > a:last-child {
     display: inline-block;
     padding: 11px 17px;
     border: 1px solid #547a9b;
@@ -125,16 +125,16 @@ header > a:last-child {
     color: #547a9b;
     font-weight: bold;
     white-space: nowrap;
-}
+} */
 
 
 /* =================================
    NAVIGATION
 ================================= */
 
-nav {
+/* nav {
     background-color: #ffffff;
-    /* border-bottom: 1px solid #dce6ee; */
+    border-bottom: 1px solid #dce6ee;
 }
 
 nav ul {
@@ -151,7 +151,7 @@ nav a {
     color: #292929;
     font-size: 16px;
     font-weight: bold;
-}
+} */
 
 
 /* =================================

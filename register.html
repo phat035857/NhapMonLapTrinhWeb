@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="icon" href="assets/image/logo - Copy.jpg" type="image/jpg" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Đăng ký - Mắt kính An Phát</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__top">
+            <div id="authentication" class="header__auth">
+                <a href="login.html">Đăng nhập</a>
+                <span>|</span>
+                <a href="register.html">Đăng ký</a>
+            </div>
+            <div id="user-info" class="header__auth hidden">
+                <span id="principal"></span>
+                <span>|</span>
+                <a href="#" id="logout">Đăng xuất</a>
+            </div>
+        </div>
+        <div class="header__main">
+            <div class="header__logo">
+                <a href="index.html">
+                    <img src="assets/image/logo.jpg" alt="logo" />
+                </a>
+            </div>
+            <div class="header__navform">
+                <nav class="header__navform--nav">
+                    <li><a href="shop.html" class="header__nav-link" data-category="gong-kinh">Gọng kính</a></li>
+                    <li><a href="shop.html" class="header__nav-link" data-category="trong-kinh">Tròng kính</a></li>
+                    <li><a href="shop.html" class="header__nav-link" data-category="kinh-mat">Kính mát</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                </nav>
+                <div class="header__actions">
+                    <form class="header__search">
+                        <input type="text" placeholder="Tìm kiếm sản phẩm..." />
+                        <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                    <div class="header__cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <h1 class="auth-title">Đăng ký</h1>
+
+        <div class="auth-grid">
+            <section class="auth-section login-box">
+                <form action="#" method="POST" id="registerForm">
+                    <div class="form-group">
+                        <input type="text" id="regUsername" class="form-input" placeholder="Tên tài khoản*" required>
+                    </div>
+
+                    <div class="form-group password-group">
+                        <input type="password" id="regPassword" class="form-input" placeholder="Mật khẩu*" required>
+                    </div>
+
+                    <div class="form-group password-group">
+                        <input type="password" id="regConfirmPassword" class="form-input" placeholder="Nhập lại mật khẩu*" required>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Đăng ký</button>
+                </form>
+            </section>
+
+            <div class="divider"></div>
+
+            <section class="auth-section register-box">
+                <h2 class="register-heading">Đã có tài khoản?</h2>
+                <p class="register-text">
+                    Đăng nhập ngay để theo dõi đơn hàng, lưu thông tin cá nhân và nhận các ưu đãi dành riêng cho thành viên.
+                </p>
+                <a href="login.html" class="btn-submit btn-register">Đăng nhập ngay</a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer__gioithieu">
+                <img src="assets/image/logo-kobackground.png" alt="logo" class="footer__logo">
+                <p class="footer-mota">
+                    Tự hào là một trong những doanh nghiệp mắt kính lớn nhất và lâu đời nhất tại Sài Gòn, với đội ngũ
+                    KTV và nhân viên nhiệt tình phục vụ quý khách.
+                </p>
+                <div class="footer__mangxahoi">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer__lienhe">
+                <h4 class="footer__h4">THÔNG TIN LIÊN HỆ</h4>
+                <div class="footer__tblienhe">
+                    <p>Điện thoại: 0358576625</p>
+                    <p>Email: phat035857@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer__sanpham">
+                <h4 class="footer__h4">DANH MỤC NỔI BẬT</h4>
+                <ul class="footer__danhsach">
+                    <li><a href="#">Tròng kính</a></li>
+                    <li><a href="#">Kính gọng</a></li>
+                    <li><a href="#">Kính mát</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/data.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/login.js"></script>
+</body>
+
+</html>

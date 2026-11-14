@@ -12,27 +12,40 @@
 
 <body>
     <header class="header">
-        <div class="header__logo">
-            <a href="index.html">
-                <img src="assets/image/logo.jpg" alt="logo" />
-            </a>
-        </div>
-        <div class="header__navform">
-            <nav class="header__navform--nav">
-                <li><a href="shop.html" class="header__nav-link" data-category="gong-kinh">Gọng kính</a></li>
-                <li><a href="shop.html" class="header__nav-link" data-category="trong-kinh">Tròng kính</a></li>
-                <li><a href="shop.html" class="header__nav-link" data-category="kinh-mat">Kính mát</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-            </nav>
-            <form class="header__navform--form">
-                <i class="fa-solid fa-cart-shopping"></i>
-            </form>
-            <div class="header__navform--login">
-                <i class="fa-regular fa-circle-user"></i>
+        <div class="header__top">
+            <div id="authentication" class="header__auth">
+                <a href="login.html">Đăng nhập</a>
+                <span>|</span>
+                <a href="register.html">Đăng ký</a>
+            </div>
+            <div id="user-info" class="header__auth hidden">
+                <span id="principal"></span>
+                <span>|</span>
+                <a href="#" id="logout">Đăng xuất</a>
             </div>
         </div>
-        <div class="hamburger">
-            <i class="fa-solid fa-bars"></i>
+        <div class="header__main">
+            <div class="header__logo">
+                <a href="index.html">
+                    <img src="assets/image/logo.jpg" alt="logo" />
+                </a>
+            </div>
+            <div class="header__navform">
+                <nav class="header__navform--nav">
+                    <li><a href="shop.html" class="header__nav-link" data-category="gong-kinh">Gọng kính</a></li>
+                    <li><a href="shop.html" class="header__nav-link" data-category="trong-kinh">Tròng kính</a></li>
+                    <li><a href="shop.html" class="header__nav-link" data-category="kinh-mat">Kính mát</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                </nav>
+                <div class="header__actions">
+                    <div class="header__cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
     </header>
 
@@ -56,21 +69,8 @@
         <section class="section2">
             <div class="shop-header">
                 <h1 id="pageTitle">Gọng kính</h1>
-                <div class="shop-toolbar">
-                    <div class="toolbar-left">
-                        <span id="resultCount">Hiển thị 0 kết quả.</span>
-                    </div>
-                    <div class="toolbar-right">
-                        <select id="sortSelect" class="sort">
-                            <option value="default">Sắp xếp theo: Nổi bật</option>
-                            <option value="price-asc">Giá: Thấp đến Cao</option>
-                            <option value="price-desc">Giá: Cao đến Thấp</option>
-                        </select>
-                    </div>
-                </div>
             </div>
             <div id="product-list" class="shop-grid"></div>
-            <div id="pagination" class="pagination-container"></div>
         </section>
     </main>
     <footer class="footer">
