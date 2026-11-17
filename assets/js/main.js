@@ -64,8 +64,8 @@ if (nutKhamPham) {
 }
 
 //xử lý khi bấm BestSeller hiện thị chi tiết sản phầm
-dsBestSeller.forEach((i)=>{
-    i.addEventListener('click', function(){
+dsBestSeller.forEach((i) => {
+    i.addEventListener('click', function () {
         const data = {
             id: i.getAttribute('data-id'),
             category: i.getAttribute('data-category'),
@@ -78,9 +78,18 @@ dsBestSeller.forEach((i)=>{
     })
 })
 
-// xử lý khi bấm vào cách trang khác
+// xử lý khi bấm các hình ở index.html
 cacLinkWebHinh.forEach((e) => {
     e.addEventListener('click', function () {
+        const loai = e.getAttribute('data-category');
+        localStorage.setItem('selectedCategory', loai);
+        window.location.href = 'shop.html';
+    });
+});
+
+cacLinkWeb.forEach((e) => {
+    e.addEventListener('click', function (evt) {
+        evt.preventDefault();
         const loai = e.getAttribute('data-category');
         localStorage.setItem('selectedCategory', loai);
         window.location.href = 'shop.html';
