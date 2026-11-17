@@ -1,182 +1,96 @@
-const nutMenu = document.querySelector('.hamburger');
 const thanhDieuHuong = document.querySelector('.header__navform');
-const khungSanPham = document.querySelector('#product-list');
-const khungTrinhChieu = document.querySelector('.carousel');
-const cacLienKetDanhMuc = document.querySelectorAll('a[data-category]');
-const tieuDeTrang = document.querySelector('#pageTitle');
+const nutMenu = document.querySelector('.hamburger');
+const cacLinkWeb = document.querySelectorAll('a[data-category]');
+const cacLinkWebHinh = document.querySelectorAll('#danh-muc article img');
+const nutKhamPham = document.querySelector('.kham-pha');
+const oSoLuongGio = document.querySelector('#cartCount');
+const dsBestSeller = document.querySelectorAll('#san-pham article');
 
-const danhMucDaLuu = localStorage.getItem('selectedCategory') || '';
-let danhSachSanPham = [];
-let viTriSlideHienTai = 0;
-let danhSachSlide = [];
-let danhSachNutSlide = [];
-
-
+//Hàm bật tắt hamberger ở màn hình điện thoại
 function batTatMenuDienThoai() {
     thanhDieuHuong.classList.toggle('active--ham');
+    nutMenu.classList.toggle('active');
 }
 
-function chuyenSlide(viTri) {
-    for (let i = 0; i < danhSachSlide.length; i++) {
-        danhSachSlide[i].classList.remove('carousel__item--selected');
-        danhSachNutSlide[i].classList.remove('carousel__button--selected');
+//Hàm cập nhật số lượng hàng ở gốc trên bên phải
+function capNhatSoGioHang() {
+    const gioHang = JSON.parse(localStorage.getItem('cart')) || [];
+    let tongSoLuong = 0;
+
+    gioHang.forEach(function (monHang) {
+        tongSoLuong += monHang.sl;
+    });
+
+    if (oSoLuongGio) {
+        oSoLuongGio.textContent = tongSoLuong;
     }
-    danhSachSlide[viTri].classList.add('carousel__item--selected');
-    danhSachNutSlide[viTri].classList.add('carousel__button--selected');
 }
 
-function xuLyBamNutSlide(suKien) {
-    viTriSlideHienTai = Number(suKien.currentTarget.getAttribute('data-index'));
-    chuyenSlide(viTriSlideHienTai);
-}
+//hàm kiểm tra xem đã đăng nhập hay chưa nếu đã đăng nhập thì "Xin chào," + tên tài khoản
+//nếu chưa đặng nhập thì hiện nút đăng nhập và đăng ký
+function checkAuthentication() {
+    const authBox = document.querySelector('#authentication');
+    const userInfoBox = document.querySelector('#user-info');
+    const principal = document.querySelector('#principal');
+    const logoutBtn = document.querySelector('#logout');
 
-function tuDongChuyenSlide() {
-    viTriSlideHienTai++;
-    if (viTriSlideHienTai >= danhSachSlide.length) {
-        viTriSlideHienTai = 0;
-    }
-    chuyenSlide(viTriSlideHienTai);
-}
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-function khoiTaoTrinhChieu() {
-    if (!khungTrinhChieu) return;
-
-    danhSachSlide = khungTrinhChieu.querySelectorAll('.carousel__item');
-    const hopNutDieuHuong = document.createElement('div');
-    hopNutDieuHuong.className = 'carousel__nav';
-
-    for (let i = 0; i < danhSachSlide.length; i++) {
-        const nutTron = document.createElement('span');
-        nutTron.className = 'carousel__button';
-        nutTron.setAttribute('data-index', i);
-        nutTron.addEventListener('click', xuLyBamNutSlide);
-        hopNutDieuHuong.appendChild(nutTron);
-    }
-
-    khungTrinhChieu.appendChild(hopNutDieuHuong);
-    danhSachNutSlide = khungTrinhChieu.querySelectorAll('.carousel__button');
-
-    chuyenSlide(0);
-    setInterval(tuDongChuyenSlide, 5000);
-}
-
-function khoiTaoDuLieuSanPham() {
-    if (danhMucDaLuu === '') {
-        danhSachSanPham = [...danhSachSanPhamGoc];
-    } else {
-        danhSachSanPham = danhSachSanPhamGoc.filter(sanPham => sanPham.danhMuc === danhMucDaLuu);
-    }
-
-    if (tieuDeTrang) {
-        if (danhMucDaLuu !== '') {
-            const lienKetDangChon = document.querySelector(`a[data-category="${danhMucDaLuu}"]`);
-            if (lienKetDangChon) {
-                tieuDeTrang.textContent = lienKetDangChon.textContent;
-            }
+    if (authBox && userInfoBox && principal) {
+        if (currentUser != null) {
+            authBox.classList.add('hidden');
+            userInfoBox.classList.remove('hidden');
+            principal.textContent = 'Xin chào, ' + currentUser.username;
         } else {
-            tieuDeTrang.textContent = "Tất cả sản phẩm";
+            authBox.classList.remove('hidden');
+            userInfoBox.classList.add('hidden');
         }
     }
-}
-
-function dinhDangGiaTien(giaTien) {
-    return giaTien.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + 'đ';
-}
-
-function xuLyChonSanPham(suKien) {
-    const maSanPham = suKien.currentTarget.getAttribute('data-id');
-}
-
-function xuLyThemGioHang(suKien) {
-    suKien.stopPropagation();
-}
-
-function taoTheSanPham(sanPham) {
-    const theSanPham = document.createElement('div');
-    theSanPham.className = 'shop-card';
-    theSanPham.style.cursor = 'pointer';
-    theSanPham.setAttribute('data-id', sanPham.ma);
-    theSanPham.addEventListener('click', xuLyChonSanPham);
-
-    const khungAnh = document.createElement('div');
-    khungAnh.className = 'shop-card__img-box';
-
-    const hinhAnh = document.createElement('img');
-    hinhAnh.src = sanPham.hinhAnh;
-    hinhAnh.alt = sanPham.ten;
-    hinhAnh.className = 'shop-card__img';
-
-    const nutGioHang = document.createElement('button');
-    nutGioHang.className = 'shop-card__cart-btn';
-    nutGioHang.innerHTML = '<i class="fa-solid fa-cart-shopping"></i>';
-    nutGioHang.addEventListener('click', xuLyThemGioHang);
-
-    khungAnh.appendChild(hinhAnh);
-    khungAnh.appendChild(nutGioHang);
-
-    const khungThongTin = document.createElement('div');
-    khungThongTin.className = 'shop-card__info';
-
-    const tenSanPham = document.createElement('h3');
-    tenSanPham.className = 'shop-card__title';
-    tenSanPham.textContent = sanPham.ten;
-
-    const khungGia = document.createElement('div');
-    khungGia.className = 'shop-card__price-box';
-
-    const giaHienTai = document.createElement('span');
-    giaHienTai.className = 'shop-card__current-price';
-    giaHienTai.textContent = dinhDangGiaTien(sanPham.gia);
-
-    khungGia.appendChild(giaHienTai);
-    khungThongTin.appendChild(tenSanPham);
-    khungThongTin.appendChild(khungGia);
-
-    theSanPham.appendChild(khungAnh);
-    theSanPham.appendChild(khungThongTin);
-
-    return theSanPham;
-}
-
-function veSanPham() {
-    while (khungSanPham.firstChild) {
-        khungSanPham.removeChild(khungSanPham.firstChild);
-    }
-
-    danhSachSanPham.forEach(sanPham => {
-        const theSanPham = taoTheSanPham(sanPham);
-        khungSanPham.appendChild(theSanPham);
+    //hàm sử lý khi bấm nút đăng xuất xóa thông tin trong currentUser(tai khoản hiện tại) và giỏ hàng
+    logoutBtn.addEventListener('click', function (evt) {
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('cart');
+        alert('Đã đăng xuất!');
+        location.href = 'index.html';
     });
 }
 
-function xuLyLocDanhMuc(suKien) {
-    const lienKet = suKien.currentTarget;
-    const danhMuc = lienKet.getAttribute('data-category');
-    localStorage.setItem('selectedCategory', danhMuc);
-
-    if (khungSanPham) {
-        suKien.preventDefault();
-        if (tieuDeTrang) {
-            tieuDeTrang.textContent = lienKet.textContent;
-        }
-
-        danhSachSanPham = danhSachSanPhamGoc.filter(sanPham => sanPham.danhMuc === danhMuc);
-        veSanPham();
-    }
+//hàm xử lý khi bấm vào nút khám phá hiện thị tất cả sản phầm ở shop.html
+if (nutKhamPham) {
+    nutKhamPham.addEventListener('click', function () {
+        localStorage.setItem('selectedCategory', '');
+        window.location.href = 'shop.html';
+    });
 }
 
+//xử lý khi bấm BestSeller hiện thị chi tiết sản phầm
+dsBestSeller.forEach((i)=>{
+    i.addEventListener('click', function(){
+        const data = {
+            id: i.getAttribute('data-id'),
+            category: i.getAttribute('data-category'),
+            name: i.querySelector('figcaption').textContent.trim(),
+            price: Number(i.getAttribute('data-price')),
+            image: i.querySelector('img').getAttribute('src')
+        };
+        localStorage.setItem('selectedProduct', JSON.stringify(data));
+        window.location.href = 'detail.html';
+    })
+})
 
-if (nutMenu) {
-    nutMenu.addEventListener('click', batTatMenuDienThoai);
-}
-
-khoiTaoTrinhChieu();
-khoiTaoDuLieuSanPham();
-
-cacLienKetDanhMuc.forEach(lienKet => {
-    lienKet.addEventListener('click', xuLyLocDanhMuc);
+// xử lý khi bấm vào cách trang khác
+cacLinkWebHinh.forEach((e) => {
+    e.addEventListener('click', function () {
+        const loai = e.getAttribute('data-category');
+        localStorage.setItem('selectedCategory', loai);
+        window.location.href = 'shop.html';
+    });
 });
 
-if (khungSanPham) {
-    veSanPham();
+
+//chạy hàm 1 lần khi mở web
+checkAuthentication();
+capNhatSoGioHang();
+if (nutMenu) {
+    nutMenu.addEventListener('click', batTatMenuDienThoai);
 }

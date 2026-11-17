@@ -1,15 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="icon" href="assets/image/logo - Copy.jpg" type="image/jpg" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <title>Ban Kinh</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="assets/image/logo - Copy.jpg" type="image/jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/shop.css">
+    <title>Mắt Kính An Phát</title>
 </head>
-
 <body>
     <header class="header">
         <div class="header__top">
@@ -32,15 +31,18 @@
             </div>
             <div class="header__navform">
                 <nav class="header__navform--nav">
+                    <li><a href="shop.html" data-category="">Tất cả</a></li>
                     <li><a href="shop.html" class="header__nav-link" data-category="gong-kinh">Gọng kính</a></li>
                     <li><a href="shop.html" class="header__nav-link" data-category="trong-kinh">Tròng kính</a></li>
                     <li><a href="shop.html" class="header__nav-link" data-category="kinh-mat">Kính mát</a></li>
-                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="shop.html" class="header__nav-link" data-category="ap-trong">Kính áp tròng</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
                 </nav>
                 <div class="header__actions">
-                    <div class="header__cart">
+                    <a href="cart.html" class="header__cart">
                         <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
+                        <span class="cart-badge" id="cartCount">0</span>
+                    </a>
                 </div>
             </div>
             <div class="hamburger">
@@ -50,35 +52,489 @@
     </header>
 
     <main class="main">
-        <section class="section1">
-            <div class="carousel">
-                <div class="carousel__item">
-                    <img src="https://storage.owndays.com/storage/top/sliders/vn_vi_medium_745_version_ac443c5c-c6d7-42c6-8a34-c5655e2fe860.webp"
-                        alt="anh1">
-                </div>
-                <div class="carousel__item">
-                    <img src="https://storage.owndays.com/storage/top/sliders/vn_vi_large_704_version_ea34120d-cb94-4a73-b636-b0b68a67faa6.webp"
-                        alt="anh2">
-                </div>
-                <div class="carousel__item">
-                    <img src="https://storage.owndays.com/storage/top/sliders/vn_vi_large_635_version_42e837e7-cf26-4106-a339-caf4a96416cc.webp"
-                        alt="anh3">
-                </div>
-            </div>
-        </section>
-        <section class="section2">
+        <section class="section">
             <div class="shop-header">
-                <h1 id="pageTitle">Gọng kính</h1>
+                <h1 id="pageTitle">Tất cả sản phẩm</h1>
             </div>
-            <div id="product-list" class="shop-grid"></div>
+            <div class="shop-tool">
+                <input type="text" name="search" id="search" placeholder="Tìm kiếm sản phẩm...">
+                <select name="price" id="price">
+                    <option value="all">Tất cả sản phẩm</option>
+                    <option value="duoi1">Dưới 1 triệu</option>
+                    <option value="1-3">1 - 3 triệu</option>
+                    <option value="3-10">3 - 10 triệu</option>
+                </select>
+                <button type="button" id="reset">Đặt lại</button>
+            </div>
+            <div id="product-list" class="shop-grid">
+                <!-- ==================== GỌNG KÍNH (1 - 10) ==================== -->
+                <article class="shop-card" data-category="gong-kinh" data-id="1">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/200000689681/product/1_f2e6da39e2b34218a2c490a29f5cbbfb_master.jpg" alt="Gọng Kính Nam Molsion MA6006 B15" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Nam Molsion MA6006 B15</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="2780000">2.780.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="2">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/1000122386/product/pr_a12vd_1ab1o1___5136bdaf451046728e2d36927ee4e700.jpg" alt="Gọng Kính Nam Prada PR A12VD" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Nam Prada PR A12VD</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="8500000">8.500.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="3">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/200000689681/1_5d6535830c7e4f31b0f0ba6f9669e50e_master.png" alt="Gọng Kính Unisex Gucci GG1121O 001" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Unisex Gucci GG1121O 001</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="10500000">10.500.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="4">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/1000122386/product/rb5387f_2000__54cn__83460a3807594eec9f37dcf565f9ecb6.jpg" alt="Gọng Kính Nam Ray-Ban RX5387 2000" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Nam Ray-Ban RX5387 2000</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="4200000">4.200.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="5">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads/2026/07/mat-kinh-bolon-augsburg-ba7081-b10.webp" alt="Gọng Kính Titanium Bolon BJ7081" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Titanium Bolon BJ7081</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="3500000">3.500.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="6">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/1000122386/product/ct0281o-001___ct0281o-003__54x18x140mm___56x18x145mm__4124c9ec6c01479ea2b4e5e50e570a05_master.jpg" alt="Gọng Kính Nữ Cartier CT0281O" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Nữ Cartier CT0281O</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="25000000">25.000.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="7">
+                    <div class="shop-card__img-box">
+                        <img src="https://gentlemonstervna.com/wp-content/uploads/2026/01/gentle-monster-noho-t9-300x300.webp" alt="Gọng Kính Tròn Gentle Monster 9 PRO" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Tròn Gentle Monster 9 PRO</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="6800000">6.800.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="8">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/1000122386/product/mb0023o_003___mb0023o_006__57-18-145___59-18-150__3dbaa98cc6544f06886ef8f86253fc5d_master.jpg" alt="Gọng Kính Nam Montblanc MB0123O" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Nam Montblanc MB0123O</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="11200000">11.200.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="9">
+                    <div class="shop-card__img-box">
+                        <img src="https://hatoeyewear.com/wp-content/uploads/2024/09/0OX8156__81560sad1__P21__shad__qt.jpg" alt="Gọng Kính Thể Thao Oakley OX8156" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Thể Thao Oakley OX8156</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="4800000">4.800.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="gong-kinh" data-id="10">
+                    <div class="shop-card__img-box">
+                        <img src="https://hatoeyewear.com/wp-content/uploads/2024/09/0OX8156__81560sad1__P21__shad__qt.jpg" alt="Gọng Kính Nhựa Acetate Burberry BE2345" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Gọng Kính Nhựa Acetate Burberry BE2345</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="5600000">5.600.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ==================== KÍNH MÁT (11 - 20) ==================== -->
+                <article class="shop-card" data-category="kinh-mat" data-id="11">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/200000689681/1_b95d26ecfede4f37a04f84f738d80c3f_grande.png" alt="Kính Mát Unisex Gucci GG1523S 001" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Unisex Gucci GG1523S 001</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="12480000">12.480.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="12">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/200000689681/product/1_c5a9aea90f69497aabf9a5bcc0a962a8.png" alt="Kính Mát Nữ Prada 0PR24ZSF" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Nữ Prada 0PR24ZSF</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="10380000">10.380.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="13">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/200000689681/1_50e0002884424c9ca4107a14adf4a1f1_grande.png" alt="Kính Mát Nam Montblanc MB0488SA" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Nam Montblanc MB0488SA</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="10680000">10.680.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="14">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/200000689681/a53614_c2.cs_42b6866d180a433bad0edbabaf8e8039_grande.png" alt="Kính Mát Nữ AMO AMO62614 C2" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Nữ AMO AMO62614 C2</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="480000">480.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="15">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/200000689681/1_fb5ccbf4c7bf40ef9418de75fe2300d0_grande.jpg" alt="Kính Mát Unisex Bolon BL3267 C10" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Unisex Bolon BL3267 C10</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="4080000">4.080.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="16">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/1000122386/rb3025_181_fb5f1b7bca324da99de7b1d0e2cce979.jpg" alt="Kính Mát Ray-Ban Aviator Classic" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Ray-Ban Aviator Classic</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="5200000">5.200.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="17">
+                    <div class="shop-card__img-box">
+                        <img src="https://dl.pew.vn/photo/2021/11/08/gentle-monster-lilit-01.jpg?v=1636344366" alt="Kính Mát Gentle Monster Lilit 01" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Gentle Monster Lilit 01</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="7200000">7.200.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="18">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.vuahanghieu.com/unsafe/0x900/left/top/smart/filters:quality(90)/https://admin.vuahanghieu.com/upload/product/2023/12/kinh-mat-dior-diorpacific-s1u-10a0-mau-den-656ee0aa9481f-05122023153450.jpg" alt="Kính Mát Nữ Dior Pacific S1U" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Nữ Dior Pacific S1U</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="14500000">14.500.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="19">
+                    <div class="shop-card__img-box">
+                        <img src="https://oakleyvietnam.vn/wp-content/uploads/2016/06/mat-kinh-the-thao-Oakley-OO9275-10_radar-ev_polished-01-scaled.jpg" alt="Kính Mát Thể Thao Oakley Radar EV" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Thể Thao Oakley Radar EV</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="6100000">6.100.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="kinh-mat" data-id="20">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/1000122386/product/ct0034s-013-_-ct0034s-014_302ca318eea9493a8d2cf835fee83dea.jpg" alt="Kính Mát Nam Cartier CT0034S" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính Mát Nam Cartier CT0034S</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="32000000">32.000.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ==================== TRÒNG KÍNH (21 - 30) ==================== -->
+                <article class="shop-card" data-category="trong-kinh" data-id="21">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.hstatic.net/products/1000357311/liensonoptic_156_blueuv_capture_maxaz_af5193235bbb4020a5465b8f64c68f72_0dfd16b7fcfb401ebffc3a96be2d2989_master.webp" alt="Tròng kính BlueUV Capture Max AZ" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng kính BlueUV Capture Max AZ</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="1500000">1.500.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="22">
+                    <div class="shop-card__img-box">
+                        <img src="https://product.hstatic.net/1000122386/product/eyezen_start_max_az_gen_8_xam_khoi_1.59_airwear_5ed430541df24b3e8c9831b38d791a3e_master.jpg" alt="Tròng kính Eyezen Transitions Gen8" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng kính Eyezen Transitions Gen8</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="3350000">3.350.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="23">
+                    <div class="shop-card__img-box">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbnXD3ENTFUDyQ93CXrNE2OmvegK-Q4sGm2Cap1l8303Nh2mBtxz3-t-c&s=10" alt="Tròng kính Myopilux Plus - Kiểm soát cận thị" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng kính Myopilux Plus - Kiểm soát cận thị</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="2200000">2.200.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="24">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads/2023/09/trong-kinh-zeiss-photofusion-x-2.jpg" alt="Tròng Kính Đổi Màu Zeiss PhotoFusion" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Đổi Màu Zeiss PhotoFusion</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="4500000">4.500.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="25">
+                    <div class="shop-card__img-box">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZb6jzjQX39KFm197s0bPrW-TVxYnZQ-JIaUnKTZdbZRRpc04Kydc4rOI&s=10" alt="Tròng Kính Chống Chói Zeiss DriveSafe" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Chống Chói Zeiss DriveSafe</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="5800000">5.800.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="26">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads/2017/11/trong-kinh-chemi-crystal-u2-coated-1-74-2.jpg" alt="Tròng Kính Siêu Mỏng Chemi 1.74" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Siêu Mỏng Chemi 1.74</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="1200000">1.200.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="27">
+                    <div class="shop-card__img-box">
+                        <img src="https://kinhmateyeplus.com/wp-content/uploads/2024/11/160-u6.png" alt="Tròng Kính Lọc Ánh Sáng Xanh Chemi U6" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Lọc Ánh Sáng Xanh Chemi U6</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="850000">850.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="28">
+                    <div class="shop-card__img-box">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4VLjS3Ii23fBpBl5auxKWOEfiZcpSl3RFwXQQtgV0yaBAz4pO_GKmnIwA&s=10" alt="Tròng Kính Hoya Nulux 1.67" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Hoya Nulux 1.67</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="2100000">2.100.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="29">
+                    <div class="shop-card__img-box">
+                        <img src="https://matkinhhoangha.com/wp-content/uploads/kodak156.jpg" alt="Tròng Kính Kodak Clean&amp;CleAR" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Kodak Clean&amp;CleAR</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="950000">950.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="trong-kinh" data-id="30">
+                    <div class="shop-card__img-box">
+                        <img src="https://hatoeyewear.com/wp-content/uploads/2025/06/z6744840983952_36782c75db1958d464d3628248e57daf.jpg" alt="Tròng Kính Đa Tròng Element Varifocal" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Tròng Kính Đa Tròng Element Varifocal</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="3100000">3.100.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ==================== KÍNH ÁP TRÒNG (31 - 35) ==================== -->
+                <article class="shop-card" data-category="ap-trong" data-id="31">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads-webpc/uploads/2024/12/kinh-ap-trong-soflens-59-3.jpg.webp" alt="Kính áp tròng Soflens 59 1 tháng (6 chiếc/hộp)" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính áp tròng Soflens 59 1 tháng (6 chiếc/hộp)</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="480000">480.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="ap-trong" data-id="32">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads-webpc/uploads/2024/12/kinh-ap-trong-freshkon-alluring-eyes-majestic-brown.jpg.webp" alt="Kính áp tròng FreshKon Alluring Eyes 3 tháng (2 chiếc/hộp)" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính áp tròng FreshKon Alluring Eyes 3 tháng (2 chiếc/hộp)</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="280000">280.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="ap-trong" data-id="33">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads-webpc/uploads/2024/12/kinh-ap-trong-freshvue-color-nature-blue-1.jpg.webp" alt="Kính áp tròng FreshVue Color Fancy 3 tháng (2 chiếc/hộp)" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính áp tròng FreshVue Color Fancy 3 tháng (2 chiếc/hộp)</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="195000">195.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="ap-trong" data-id="34">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads-webpc/uploads/2024/12/kinh-ap-trong-freshvue-color-nature-blue.jpg.webp" alt="Kính áp tròng FreshVue Color Nature 3 tháng (2 chiếc/hộp)" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính áp tròng FreshVue Color Nature 3 tháng (2 chiếc/hộp)</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="195000">195.000đ</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="shop-card" data-category="ap-trong" data-id="35">
+                    <div class="shop-card__img-box">
+                        <img src="https://cdn.matkinhtamduc.com/wp-content/uploads-webpc/uploads/2024/12/kinh-ap-trong-freshvue-55-uv-1.jpg.webp" alt="Kính áp tròng FreshVue 55 UV 3 tháng (6 chiếc/hộp)" class="shop-card__img">
+                        <button class="shop-card__cart-btn add-cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="shop-card__info">
+                        <h3 class="shop-card__title">Kính áp tròng FreshVue 55 UV 3 tháng (6 chiếc/hộp)</h3>
+                        <div class="shop-card__price-box">
+                            <span class="shop-card__current-price" data-price="480000">480.000đ</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer__gioithieu">
-                <img src="assets/image/logo-kobackground.png" alt="logo" class=" footer__logo">
+                <img src="assets/image/logo-kobackground.png" alt="logo" class="footer__logo">
                 <p class="footer-mota">
-                    Sản phẩm được thực hiện bởi nhóm sinh viên Đại học Cần Thơ.
+                    Website cửa hàng Mắt kính An Phát – Sản phẩm thực hành môn Nhập môn Lập trình Web của nhóm sinh viên Đại học Cần Thơ.
                 </p>
                 <div class="footer__mangxahoi">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -96,15 +552,15 @@
             <div class="footer__sanpham">
                 <h4 class="footer__h4">DANH MỤC NỔI BẬT</h4>
                 <ul class="footer__danhsach">
-                    <li><a href="#">Tròng kính</a></li>
-                    <li><a href="#">Kính gọng</a></li>
-                    <li><a href="#">Kính mát</a></li>
+                    <li><a href="shop.html" data-category="trong-kinh">Tròng kính</a></li>
+                    <li><a href="shop.html" data-category="gong-kinh">Gọng kính</a></li>
+                    <li><a href="shop.html" data-category="kinh-mat">Kính mát</a></li>
+                    <li><a href="shop.html" data-category="ap-trong">Kính áp tròng</a></li>
                 </ul>
             </div>
         </div>
     </footer>
-    <script src="assets/js/data.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/shop.js"></script>
 </body>
-
 </html>
