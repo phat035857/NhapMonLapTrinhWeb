@@ -20,7 +20,8 @@ if (formDangNhap) {
         }
     });
 
-    formDangNhap.addEventListener('submit', function () {
+    formDangNhap.addEventListener('submit', function (e) {
+        e.preventDefault();
         const taiKhoan = oTaiKhoan.value.trim();
         const matKhau = oMatKhau.value.trim();
 
@@ -91,7 +92,8 @@ if (formDangKy) {
     });
 
     // Xử lý kiểm tra dữ liệu và lưu tài khoản khi bấm Đăng ký
-    formDangKy.addEventListener('submit', function () {
+    formDangKy.addEventListener('submit', function (e) {
+        e.preventDefault();
         const username = oUsername.value.trim();
         const fullName = oFullName.value.trim();
         const email = oEmail.value.trim();

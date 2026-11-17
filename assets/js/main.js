@@ -47,12 +47,14 @@ function checkAuthentication() {
         }
     }
     //hàm sử lý khi bấm nút đăng xuất xóa thông tin trong currentUser(tai khoản hiện tại) và giỏ hàng
-    logoutBtn.addEventListener('click', function (evt) {
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('cart');
-        alert('Đã đăng xuất!');
-        location.href = 'index.html';
-    });
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function () {
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('cart');
+            alert('Đã đăng xuất!');
+            location.href = 'index.html';
+        });
+    }
 }
 
 //hàm xử lý khi bấm vào nút khám phá hiện thị tất cả sản phầm ở shop.html

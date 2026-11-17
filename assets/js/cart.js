@@ -111,12 +111,46 @@ function showcart() {
     td2.textContent = tong.toLocaleString('vi-VN') + 'đ';
 
     const td3 = document.createElement('td');
+    td3.rowSpan = 3;
 
     //thêm vào tlfooter để hiện thị
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
     tlfooter.appendChild(tr);
+
+    const thueVAT = Math.floor(tong * 0.1);
+    const tongThanhToan = tong + thueVAT;
+
+    const trThue = document.createElement('tr');
+
+    const tdThueLabel = document.createElement('td');
+    tdThueLabel.colSpan = 4;
+    tdThueLabel.classList.add('total-label');
+    tdThueLabel.textContent = 'VAT (10%):';
+
+    const tdThueValue = document.createElement('td');
+    tdThueValue.classList.add('total-value');
+    tdThueValue.textContent = thueVAT.toLocaleString('vi-VN') + 'đ';
+
+    trThue.appendChild(tdThueLabel);
+    trThue.appendChild(tdThueValue);
+    tlfooter.appendChild(trThue);
+
+    const trThanhTien = document.createElement('tr');
+
+    const tdThanhTienLabel = document.createElement('td');
+    tdThanhTienLabel.colSpan = 4;
+    tdThanhTienLabel.classList.add('total-label');
+    tdThanhTienLabel.textContent = 'Thành tiền:';
+
+    const tdThanhTienValue = document.createElement('td');
+    tdThanhTienValue.classList.add('total-value');
+    tdThanhTienValue.textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
+
+    trThanhTien.appendChild(tdThanhTienLabel);
+    trThanhTien.appendChild(tdThanhTienValue);
+    tlfooter.appendChild(trThanhTien);
 }
 
 //hàm tẳng giảm số lượng sản phẩm
@@ -171,7 +205,7 @@ if (nutDatHang) {
         //nếu được click vào thì xóa khỏi localstorage coi như đặt hàng thành côngvaf
         alert('Đặt hàng thành công!');
         localStorage.removeItem('cart');
-        location.reload();
+        location.href = 'index.html';
     });
 }
 //Chạy hàm này lần đầu vào web để hiện thị các sản phẩm khách hàng đã thêm vào cart
