@@ -133,8 +133,7 @@ function doiSoLuong(idSanPham, thayDoi) {
     });
     //Đặt lại vào localstorage để hiện thị lại lên màng hình của khách hàng
     localStorage.setItem('cart', JSON.stringify(gioHangHienTai));
-    showcart();
-    capNhatSoGioHang();
+    location.reload();
 }
 
 //hàm xóa sản phẩm cho nút dele đã tạo ở trên
@@ -157,6 +156,18 @@ function xoaSanPham(idSanPham) {
 const nutDatHang = document.querySelector('#btnOrder');
 if (nutDatHang) {
     nutDatHang.addEventListener('click', function () {
+        if (localStorage.getItem('currentUser') == null) {
+            alert('Vui lòng đăng nhập để đặt hàng!');
+            location.href = 'login.html';
+            return;
+        }
+
+        const gioHang = JSON.parse(localStorage.getItem('cart')) || [];
+
+        if (gioHang.length === 0) {
+            alert('Giỏ hàng của bạn đang trống, vui lòng chọn sản phẩm trước khi đặt hàng!');
+            return;
+        }
         //nếu được click vào thì xóa khỏi localstorage coi như đặt hàng thành côngvaf
         alert('Đặt hàng thành công!');
         localStorage.removeItem('cart');
