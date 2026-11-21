@@ -72,8 +72,9 @@ main {
 }
 
 .header__logo img {
-    height: 45px;
-    object-fit: contain;
+    width: 85px;
+    height: 65px;
+    object-fit: cover;
 }
 
 .header__navform {
@@ -174,6 +175,7 @@ main {
     border: 1px solid #cbd5e1;
     border-radius: 8px;
     padding: 4px 6px;
+    color: black;
 }
 
 .qlsl button {
@@ -239,12 +241,13 @@ main {
 .footer__gioithieu {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .footer__logo {
-    height: 50px;
-    margin-bottom: 20px;
-    object-fit: cover;
+    width: 280px;
+    height: 90px;
+    object-fit: contain;
 }
 
 .footer-mota {
@@ -376,6 +379,22 @@ main {
     .header__navform--nav li::after {
         width: 100%;
     }
+    .theme-toggle__actions {
+        width: 46px;
+        height: 26px;
+        border: none;
+        margin-left: 15px;
+        border-radius: 20px;
+        background-color: #CBD5E1;
+        padding: 3px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.3s ease;
+    }
+    body.dark-mode .header__navform {
+        background-color: #111827;
+    }
 }
 
 @media (max-width: 600px) {
@@ -395,4 +414,72 @@ main {
         grid-template-columns: 1fr;
         gap: 24px;
     }
+}
+/* LIÊN QUAN ĐẾN DARK - MODE */
+/* Công tắc Dark Mode */
+.theme-toggle {
+    width: 46px;
+    height: 26px;
+    border: none;
+    border-radius: 20px;
+    background-color: #CBD5E1;
+    padding: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+/* Núm tròn bên trong công tắc */
+.numtron {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Màu background của công tắc khi bật Dark Mode */
+body.dark-mode .theme-toggle {
+    background-color: #2DD4BF;
+}
+/* Hiệu ứng di chuyển núm tròn sang bên phải khi bật Dark Mode */
+body.dark-mode .numtron {
+    transform: translateX(20px);
+}
+body.dark-mode .header {
+    background-color: #111827;
+}
+body.dark-mode .header__top,
+body.dark-mode .header__auth,
+body.dark-mode .header__auth a,
+body.dark-mode .header__navform--nav a,
+body.dark-mode .header__cart {
+    color: #F1F5F9;
+}
+body.dark-mode .header__navform--nav a:hover, 
+body.dark-mode .header__cart:hover,
+body.dark-mode .header__auth a:hover {
+    color: #2AD0CC;
+}
+body.dark-mode .footer {
+    background-color: #111827;
+    color: #F1F5F9;
+}
+
+body.dark-mode .footer-mota {
+    color: #CBD5E1;
+}
+
+body.dark-mode .footer__mangxahoi a {
+    color: #CBD5E1;
+}
+
+body.dark-mode .footer__danhsach a {
+    color: #CBD5E1;
+}
+
+body.dark-mode .footer__tblienhe > p {
+    color: #CBD5E1;
 }

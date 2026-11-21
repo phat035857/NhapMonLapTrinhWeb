@@ -60,6 +60,7 @@
     max-width: 380px;
     height: auto;
     object-fit: contain;
+    border-radius: 12px;
 }
 
 .detail-right {
@@ -211,4 +212,61 @@
     .btn-buy-now {
         width: 100%;
     }
+}
+/* LIÊN QUAN ĐẾN DARK - MODE */
+body.dark-mode .main-detail {
+    background-color: #0F172A;
+}
+
+body.dark-mode .detail-box {
+    background-color: #1E293B;
+}
+
+body.dark-mode .detail-left {
+    background-color: #1E293B;
+}
+
+body.dark-mode .detail-nav {
+    color: #CBD5E1;
+}
+
+body.dark-mode .detail-nav > a {
+    color: #F1F5F9;
+}
+
+body.dark-mode .detail__current {
+    color: #94A3B8;
+}
+
+body.dark-mode .detail-name {
+    color: #F1F5F9;
+}
+
+body.dark-mode .detail-code {
+    color: #CBD5E1;
+}
+
+body.dark-mode .info-table tr:nth-child(odd) {
+    background-color: #334155;
+}
+
+body.dark-mode .info-table td:first-child {
+    color: #CBD5E1;
+}
+
+body.dark-mode .info-table td:last-child {
+    color: #F1F5F9;
+}
+
+body.dark-mode .sell-row {
+    color: #F1F5F9;
+}
+
+body.dark-mode .btn-add-cart {
+    background-color: #334155;
+    color: #2DD4BF;
+}
+
+body.dark-mode .btn-add-cart:hover {
+    background-color: #475569;
 }
