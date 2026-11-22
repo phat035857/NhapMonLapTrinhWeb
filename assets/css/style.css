@@ -26,7 +26,7 @@ main {
     display: none !important;
 }
 
-/* header start */
+
 .header {
     background-color: white;
     padding: 8px 50px 14px;
@@ -162,9 +162,8 @@ main {
     align-items: center;
     justify-content: center;
 }
-/* header end */
 
-/* cụm tăng giảm số lượng dùng chung (detail + cart) */
+
 .qlsl {
     display: inline-flex;
     align-items: center;
@@ -202,7 +201,6 @@ main {
     font-size: 15px;
 }
 
-/* footer start */
 .footer {
     background-color: #EAEEF0;
     color: #000;
@@ -212,9 +210,18 @@ main {
 .footer-container {
     max-width: 1200px;
     margin: 20px auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 40px;
+}
+
+.footer-container > div {
+    float: left;
+    width: 33.33%;
+    padding: 0 20px;
+}
+
+.footer-container::after { 
+    content: "";
+    display: block;
+    clear: both;
 }
 
 .footer__h4 {
@@ -296,7 +303,7 @@ main {
 .footer__tblienhe > p {
     color: #000;
 }
-/* footer end */
+
 
 @media (max-width: 1024px) {
     .header {
@@ -311,9 +318,13 @@ main {
         gap: 24px;
     }
 
-    .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+    .footer-container > div {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+
+    .footer-container > div:last-child {
+        clear: left;
     }
 }
 
@@ -391,8 +402,9 @@ main {
         padding: 32px 16px;
     }
 
-    .footer-container {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    .footer-container > div {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 24px;
     }
 }
