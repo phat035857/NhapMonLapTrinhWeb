@@ -6,6 +6,13 @@ const oTimKiem = document.querySelector('#search');
 const dsNutThemGio = document.querySelectorAll('.add-cart-btn');
 const dsTheShop = document.querySelectorAll('.shop-card');
 
+
+// Lấy danh mục từ URL
+function layDanhMucURL() {
+    const thamSoURL = new URLSearchParams(window.location.search);
+    return thamSoURL.get('category') || '';
+}
+
 //Làm đổi tiêu đề để hiện thị ra web
 function doiTieuDe(loai) {
     if (loai === 'gong-kinh') {
@@ -23,7 +30,7 @@ function doiTieuDe(loai) {
 
 //hàm lọc sản phẩm them danh mục đã chọn
 function locSanPham() {
-    const loai = localStorage.getItem('selectedCategory') || '';
+    const loai = layDanhMucURL();
     //chọn tất cả sản phẩm
     const data = document.querySelectorAll('.shop-card');
     doiTieuDe(loai);
@@ -46,7 +53,7 @@ function kiemTraGia(gia, mucGia) {
 }
 //hàm xử lý khi người dùng lọc theo giá bán
 function locTheoGia() {
-    const loai = localStorage.getItem('selectedCategory') || '';
+    const loai = layDanhMucURL();
     const mucGia = oLocGia.value;
     const danhSachSanPham = document.querySelectorAll('.shop-card');
 
@@ -75,7 +82,7 @@ function nuReset() {
 
 //hàm xử lý khi khách hàng dùng tính năng tìm kiếm
 function timKiemSanPham() {
-    const loai = localStorage.getItem('selectedCategory') || '';
+    const loai = layDanhMucURL();
     const mucGia = oLocGia.value;
     const tuKhoa = oTimKiem.value.trim().toLowerCase();
     const dsThe = khungSanPham.querySelectorAll('.shop-card');
@@ -112,8 +119,10 @@ function docThongTinThe(the) {
 dsNutThemGio.forEach(function (nutGio) {
     nutGio.addEventListener('click', function (suKien) {
         suKien.stopPropagation(); //ngăn chặn lan truyền sự vì dsNut[i] là cỏn của shop-card nên khi bấm nó sẽ kích hoạt 2 cái even 1 lúc nên phải thêm stopPropagation(); 
-        //nếu currentUser == null hay chưa đặng nhập thì ko thêm vào giỏ hàng được
-        if (localStorage.getItem('currentUser') == null) {
+        //nếu account == null hay chưa đặng nhập thì ko thêm vào giỏ hàng được
+        const account = JSON.parse(localStorage.getItem('account'));
+
+        if (account == null || account.isLoggedIn !== true) {
             alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
             location.href = 'login.html';
             return;
@@ -145,8 +154,7 @@ dsNutThemGio.forEach(function (nutGio) {
 dsTheShop.forEach(function (the) {
     the.addEventListener('click', function () {
         const spChon = docThongTinThe(the);
-        localStorage.setItem('selectedProduct', JSON.stringify(spChon));
-        window.location.href = 'detail.html';
+        chuyenTrangChiTiet(spChon);
     });
 });
 //gắn sự kiện cho các nút

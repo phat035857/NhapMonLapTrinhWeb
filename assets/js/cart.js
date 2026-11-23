@@ -190,7 +190,9 @@ function xoaSanPham(idSanPham) {
 const nutDatHang = document.querySelector('#btnOrder');
 if (nutDatHang) {
     nutDatHang.addEventListener('click', function () {
-        if (localStorage.getItem('currentUser') == null) {
+        const account = JSON.parse(localStorage.getItem('account'));
+
+        if (account == null || account.isLoggedIn !== true) {
             alert('Vui lòng đăng nhập để đặt hàng!');
             location.href = 'login.html';
             return;

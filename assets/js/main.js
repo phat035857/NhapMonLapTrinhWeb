@@ -34,40 +34,72 @@ function checkAuthentication() {
     const principal = document.querySelector('#principal');
     const logoutBtn = document.querySelector('#logout');
 
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const account = JSON.parse(localStorage.getItem('account'));
 
     if (authBox && userInfoBox && principal) {
-        if (currentUser != null) {
+        if (account != null && account.isLoggedIn === true) {
             authBox.classList.add('hidden');
             userInfoBox.classList.remove('hidden');
-            principal.textContent = 'Xin chào, ' + currentUser.username;
+            principal.textContent = 'Xin chào, ' + account.username;
         } else {
             authBox.classList.remove('hidden');
             userInfoBox.classList.add('hidden');
         }
     }
-    //hàm sử lý khi bấm nút đăng xuất xóa thông tin trong currentUser(tai khoản hiện tại) và giỏ hàng
+    //hàm sử lý khi bấm nút đăng xuất và giỏ hàng
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', function () {
-            localStorage.removeItem('currentUser');
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const account = JSON.parse(localStorage.getItem('account'));
+
+            if (account != null) {
+                account.isLoggedIn = false;
+                localStorage.setItem('account', JSON.stringify(account));
+            }
+
             localStorage.removeItem('cart');
+
             alert('Đã đăng xuất!');
             location.href = 'index.html';
         });
     }
 }
 
+// Chuyển đến trang sản phẩm theo danh mục
+function chuyenTrangShop(loai) {
+    if (loai === '') {
+        window.location.href = 'shop.html';
+    } else {
+        window.location.href = 'shop.html?category=' + encodeURIComponent(loai);
+    }
+}
+
+// Chuyển đến trang chi tiết sản phẩm
+function chuyenTrangChiTiet(sp) {
+    const url = 'detail.html?' +
+        'id=' + encodeURIComponent(sp.id) +
+        '&category=' + encodeURIComponent(sp.category) +
+        '&name=' + encodeURIComponent(sp.name) +
+        '&price=' + encodeURIComponent(sp.price) +
+        '&image=' + encodeURIComponent(sp.image);
+
+    window.location.href = url;
+}
+
 //hàm xử lý khi bấm vào nút khám phá hiện thị tất cả sản phầm ở shop.html
 if (nutKhamPham) {
-    nutKhamPham.addEventListener('click', function () {
-        localStorage.setItem('selectedCategory', '');
-        window.location.href = 'shop.html';
+    nutKhamPham.addEventListener('click', function (e) {
+        e.preventDefault();
+        chuyenTrangShop('');
     });
 }
 
 //xử lý khi bấm BestSeller hiện thị chi tiết sản phầm
 dsBestSeller.forEach((i) => {
-    i.addEventListener('click', function () {
+    i.addEventListener('click', function (e) {
+        e.preventDefault();
+
         const data = {
             id: i.getAttribute('data-id'),
             category: i.getAttribute('data-category'),
@@ -75,26 +107,25 @@ dsBestSeller.forEach((i) => {
             price: Number(i.getAttribute('data-price')),
             image: i.querySelector('img').getAttribute('src')
         };
-        localStorage.setItem('selectedProduct', JSON.stringify(data));
-        window.location.href = 'detail.html';
-    })
-})
+
+        chuyenTrangChiTiet(data);
+    });
+});
 
 // xử lý khi bấm các hình ở index.html
 cacLinkWebHinh.forEach((e) => {
     e.addEventListener('click', function () {
         const loai = e.getAttribute('data-category');
-        localStorage.setItem('selectedCategory', loai);
-        window.location.href = 'shop.html';
+        chuyenTrangShop(loai);
     });
 });
 
 cacLinkWeb.forEach((e) => {
     e.addEventListener('click', function (evt) {
         evt.preventDefault();
+
         const loai = e.getAttribute('data-category');
-        localStorage.setItem('selectedCategory', loai);
-        window.location.href = 'shop.html';
+        chuyenTrangShop(loai);
     });
 });
 

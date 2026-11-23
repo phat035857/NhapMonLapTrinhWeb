@@ -12,8 +12,16 @@ function doiTenDanhMuc(maLoai) {
 }
 //Hàm vẽ ra màng hình sản phẩm vừa bấm vào
 function showDetail() {
-    //lấy thông tin từ localstorage
-    let sp = JSON.parse(localStorage.getItem('selectedProduct'));
+    // Lấy thông tin sản phẩm từ URL
+    const thamSoURL = new URLSearchParams(window.location.search);
+
+    const sp = {
+        id: thamSoURL.get('id'),
+        category: thamSoURL.get('category'),
+        name: thamSoURL.get('name'),
+        price: Number(thamSoURL.get('price')),
+        image: thamSoURL.get('image')
+    };
     if (sp == null) {
         alert('Không tìm thấy sản phẩm.');
         location.href = 'shop.html';
@@ -27,9 +35,7 @@ function showDetail() {
     //in tên loại ra màn hình
     linkDanhMuc.textContent = tenLoai;
     //Hàm click set lại loại sản phẩm để in ra đúng loại trong shop.html
-    linkDanhMuc.onclick = function () {
-        localStorage.setItem('selectedCategory', sp.category);
-    };
+    linkDanhMuc.href = 'shop.html?category=' + encodeURIComponent(sp.category);
 
     
     detailCurrent.textContent = sp.name;
@@ -174,8 +180,10 @@ function showDetail() {
 }
 //hàm thêm sản phầm vào giỏ hàng
 function themVaoGioHang(sanPham, soLuong) {
-    //nếu chưa có currentUser(chưa đăng nhập) thì hiện vui lòng đăng nhập và chuyển khách hàng qua trang đăng nhập
-    if (localStorage.getItem('currentUser') == null) {
+    //nếu account == null hoặc chưa đăng nhập thì hiện vui lòng đăng nhập và chuyển khách hàng qua trang đăng nhập
+    const account = JSON.parse(localStorage.getItem('account'));
+
+    if (account == null || account.isLoggedIn !== true) {
         alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!');
         location.href = 'login.html';
         return false;

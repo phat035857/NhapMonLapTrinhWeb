@@ -52,7 +52,9 @@ if (formDangNhap) {
         const account = JSON.parse(localStorage.getItem('account'));
 
         if (account != null && (taiKhoan === account.username || taiKhoan === account.email) && matKhau === account.password) {
-            localStorage.setItem('currentUser', JSON.stringify(account));
+            account.isLoggedIn = true;
+            localStorage.setItem('account', JSON.stringify(account));
+
             alert('Đăng nhập thành công!');
             location.href = 'index.html';
         } else {
@@ -184,7 +186,8 @@ if (formDangKy) {
             email: email,
             phone: phone,
             address: address,
-            password: password
+            password: password,
+            isLoggedIn: false
         };
 
         // Lưu vào localStorage

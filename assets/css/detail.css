@@ -270,3 +270,12 @@ body.dark-mode .btn-add-cart {
 body.dark-mode .btn-add-cart:hover {
     background-color: #475569;
 }
+
+body.dark-mode .qlsl{
+    background-color: #f8fafc54;
+    border: none;
+}
+
+body.dark-mode .qlsl button{
+    background-color: #f8fafc54;
+}

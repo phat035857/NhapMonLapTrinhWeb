@@ -322,12 +322,25 @@ main {
     }
 
     .footer-container > div {
-        width: 50%;
-        margin-bottom: 30px;
+        float: none;
+        clear: none;
+        width: 100%;
+        padding: 0;
+        margin-bottom: 28px;
+        text-align: center;
     }
 
     .footer-container > div:last-child {
-        clear: left;
+        margin-bottom: 0;
+    }
+
+    .footer__gioithieu {
+        align-items: center;
+    }
+
+    .footer__h4::after {
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
 
@@ -343,6 +356,10 @@ main {
         top: 15px;
         right: 20px;
         z-index: 1002;
+    }
+
+    body.dark-mode .hamburger{
+        color: white;
     }
 
     .header__navform {
