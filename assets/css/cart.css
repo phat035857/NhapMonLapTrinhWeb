@@ -152,3 +152,49 @@
         align-items: stretch;
     }
 }
+/* LIÊN QUAN ĐẾN DARK - MODE */
+body.dark-mode .main-cart {
+    background-color: #0F172A;
+}
+
+body.dark-mode .cart-title {
+    color: #F1F5F9;
+}
+
+body.dark-mode .table-wrapper {
+    background-color: #1E293B;
+    box-shadow: none;
+}
+
+body.dark-mode .list-body td,
+body.dark-mode .list-foot td {
+    color: #F1F5F9;
+}
+
+body.dark-mode .list-body tr:nth-child(even) {
+    background-color: #334155;
+}
+
+body.dark-mode .list-foot td {
+    background-color: #1E293B;
+}
+
+body.dark-mode .cart-img {
+    background-color: #334155;
+    border-color: #475569;
+}
+
+body.dark-mode .total-value {
+    color: #2DD4BF;
+}
+
+body.dark-mode .btn-continue-shop {
+    color: #2DD4BF;
+}
+
+body.dark-mode .detail-nav > a {
+    color: #F1F5F9;
+}
+body.dark-mode .detail-nav {
+    color: #F1F5F9;
+}

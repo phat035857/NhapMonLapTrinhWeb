@@ -524,3 +524,66 @@ footer p {
         height: 230px;
     }
 }
+/* LIÊN QUAN ĐẾN DARK - MODE */
+body.dark-mode {
+    background-color: #0F172A;
+    color: #F1F5F9;
+}
+
+body.dark-mode #hero {
+    background-color: #1E293B;
+}
+
+body.dark-mode #hero h1 {
+    color: #7DD3FC;
+}
+
+body.dark-mode .hero-label {
+    color: #7DD3FC;
+}
+
+body.dark-mode .hero-description {
+    color: #CBD5E1;
+}
+
+body.dark-mode #danh-muc h2 {
+    color: #7DD3FC;
+}
+
+body.dark-mode #danh-muc h3 {
+    color: #F1F5F9;
+}
+
+body.dark-mode #danh-muc article p {
+    color: #CBD5E1;
+}
+
+body.dark-mode #san-pham h2 {
+    color: #7DD3FC;
+}
+
+body.dark-mode #san-pham figcaption {
+    color: #F1F5F9;
+}
+
+body.dark-mode #san-pham article p {
+    color: #7DD3FC;
+}
+
+body.dark-mode #ly-do-chon-an-phat h2 {
+    color: #7DD3FC;
+}
+
+body.dark-mode #ly-do-chon-an-phat article {
+    background-color: #1E293B;
+    border-color: #334155;
+}
+
+body.dark-mode #ly-do-chon-an-phat h3 {
+    color: #7DD3FC;
+}
+
+body.dark-mode #ly-do-chon-an-phat p {
+    color: #CBD5E1;
+}
+

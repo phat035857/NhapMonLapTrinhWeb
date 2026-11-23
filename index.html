@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/image/logo - Copy.jpg" type="image/jpg" />
     <link rel="stylesheet" href="assets/css/homepage.css" />
     <title>Mắt kính An Phát</title>
 </head>
@@ -27,7 +28,7 @@
         <div class="header__main">
             <div class="header__logo">
                 <a href="index.html">
-                    <img src="assets/image/logo.jpg" alt="logo" />
+                    <img src="assets/image/logo-khongbackground.png" alt="logo" />
                 </a>
             </div>
             <div class="header__navform">
@@ -43,6 +44,7 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                         <span class="cart-badge" id="cartCount">0</span>
                     </a>
+                    <button type="button" id="themeToggle"class="theme-toggle" onclick="ChangeMode()"><span class="numtron"></span></button>
                 </div>
             </div>
             <div class="hamburger">
@@ -146,7 +148,7 @@
     <footer class="footer">
         <div class="footer-container">
             <div class="footer__gioithieu">
-                <img src="assets/image/logo-kobackground.png" alt="logo" class=" footer__logo">
+                <img src="assets/image/logo-khongbackground.png" alt="logo" class=" footer__logo">
                 <p class="footer-mota">
                     Website cửa hàng Mắt kính An Phát – Sản phẩm thực hành môn Nhập môn Lập trình Web của nhóm sinh viên
                     Đại học Cần Thơ.
@@ -176,6 +178,7 @@
         </div>
     </footer>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/theme.js"></script>
 </body>
 
 </html>

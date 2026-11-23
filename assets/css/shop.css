@@ -40,12 +40,12 @@
 
 .shop-card__img-box {
     position: relative;
-    padding-top: 10px;
 }
 
 .shop-card__img {
     width: 100%;
     object-fit: cover;
+    border-radius: 12px 12px 0px 0px;
 }
 
 .shop-card__cart-btn {
@@ -162,4 +162,48 @@
         grid-template-columns: 1fr;
         gap: 16px;
     }
+}
+/* LIÊN QUAN ĐẾN DARK - MODE */
+body.dark-mode {
+    background-color: #0F172A;
+}
+
+body.dark-mode .shop-header {
+    border-bottom-color: #334155;
+}
+
+body.dark-mode .shop-header h1 {
+    color: #F1F5F9;
+}
+
+body.dark-mode .shop-card {
+    background-color: #1E293B;
+    border-color: #334155;
+}
+
+body.dark-mode .shop-card__title {
+    color: #F1F5F9;
+}
+
+body.dark-mode .shop-card__cart-btn {
+    background-color: #334155;
+    border-color: #475569;
+    color: #F1F5F9;
+}
+
+body.dark-mode .shop-card__cart-btn:hover {
+    background-color: #475569;
+    color: #2DD4BF;
+}
+
+body.dark-mode .shop-tool input {
+    background-color: #1E293B;
+    border-color: #475569;
+    color: #F1F5F9;
+}
+
+body.dark-mode .shop-tool > select {
+    background-color: #1E293B;
+    border-color: #475569;
+    color: #F1F5F9;
 }
