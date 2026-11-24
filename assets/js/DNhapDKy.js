@@ -1,10 +1,5 @@
 /*
- * @File: DNhapDKy.js - Form Validation & Client-Side Authentication using Web Storage (localStorage)
- * @Module: CT188 - Nhập môn Lập trình Web
- * Trường Công nghệ Thông tin & Truyền thông - Đại học Cần Thơ (CTU)
- * Giảng viên hướng dẫn: ThS. GVC. Vũ Duy Linh
- * Đồ án: Website Cửa hàng Mắt kính An Phát
- * Ghi chú: Kỹ thuật kiểm tra form phía Client (Form Validation) bằng Biểu thức chính quy (Regular Expression)
+ * @File: DNhapDKy.js - Đăng nhập, Đăng ký & Kiểm tra dữ liệu form
  */
 
 // ====================================================================================================
@@ -14,13 +9,13 @@
 const formDangNhap = document.querySelector('#loginForm');
 
 if (formDangNhap) {
-    // DOM Traversal: Lấy các trường input và icon toggle mật khẩu
+    // Duyệt cây DOM: Lấy các trường nhập liệu và icon bật/tắt mật khẩu
     const oTaiKhoan = document.querySelector('#loginUser');
     const oMatKhau = document.querySelector('#loginPassword');
     const nutMat = document.querySelector('.eye-toggle');
     const iconMat = nutMat.querySelector('i');
 
-    // Event Listener: Bật/tắt hiển thị mật khẩu (Password Toggle)
+    // Lắng nghe sự kiện: Bật/tắt hiển thị mật khẩu
     nutMat.addEventListener('click', function () {
         if (oMatKhau.type === 'password') {
             oMatKhau.type = 'text';
@@ -33,29 +28,29 @@ if (formDangNhap) {
         }
     });
 
-    // Event Listener: Xử lý submit form đăng nhập (Event Object: e)
+    // Lắng nghe sự kiện: Xử lý gửi form đăng nhập
     formDangNhap.addEventListener('submit', function (e) {
-        e.preventDefault(); // Ngăn chặn reload trang mặc định
+        e.preventDefault(); // Ngăn chặn tải lại trang mặc định
 
         const taiKhoan = oTaiKhoan.value.trim();
         const matKhau = oMatKhau.value.trim();
 
-        // Lấy các element hiển thị thông báo lỗi
+        // Lấy các phần tử hiển thị thông báo lỗi
         const loiTaiKhoan = oTaiKhoan.parentElement.querySelector('.form-error');
         const loiMatKhau = oMatKhau.parentElement.querySelector('.form-error');
         let hopLe = true;
 
-        // Reset error message
+        // Xóa thông báo lỗi cũ
         loiTaiKhoan.textContent = '';
         loiMatKhau.textContent = '';
 
-        // Validation 1: Kiểm tra rỗng tài khoản
+        // Kiểm tra 1: Kiểm tra rỗng tài khoản
         if (taiKhoan === '') {
             loiTaiKhoan.textContent = 'Vui lòng nhập tài khoản hoặc email.';
             hopLe = false;
         }
 
-        // Validation 2: Kiểm tra rỗng mật khẩu
+        // Kiểm tra 2: Kiểm tra rỗng mật khẩu
         if (matKhau === '') {
             loiMatKhau.textContent = 'Vui lòng nhập mật khẩu.';
             hopLe = false;
@@ -63,13 +58,13 @@ if (formDangNhap) {
 
         if (!hopLe) return; // Dừng nếu dữ liệu chưa hợp lệ
 
-        // Authentication logic: Đọc thông tin tài khoản từ localStorage
+        // Kiểm tra xác thực: Đọc thông tin tài khoản từ localStorage
         const account = JSON.parse(localStorage.getItem('account'));
 
-        // Đối chiếu username/email và password với dữ liệu đã đăng ký
+        // Đối chiếu tên đăng nhập/email và mật khẩu với dữ liệu đã lưu
         if (account != null && (taiKhoan === account.username || taiKhoan === account.email) && matKhau === account.password) {
             account.isLoggedIn = true; // Cập nhật trạng thái phiên đăng nhập
-            localStorage.setItem('account', JSON.stringify(account)); // Lưu vào Web Storage
+            localStorage.setItem('account', JSON.stringify(account)); // Lưu vào localStorage
 
             alert('Đăng nhập thành công!');
             location.href = 'index.html'; // Chuyển về trang chủ
@@ -86,7 +81,7 @@ if (formDangNhap) {
 const formDangKy = document.querySelector('#registerForm');
 
 if (formDangKy) {
-    // DOM Traversal: Lấy các phần tử form đăng ký
+    // Duyệt cây DOM: Lấy các phần tử trong form đăng ký
     const oUsername = document.querySelector('#regUsername');
     const oFullName = document.querySelector('#regFullName');
     const oEmail = document.querySelector('#regEmail');
@@ -96,7 +91,7 @@ if (formDangKy) {
     const oConfirmPass = document.querySelector('#regConfirmPassword');
     const oAgree = document.querySelector('#agreeTerms');
 
-    // Event Listener: Toggle ẩn/hiện mật khẩu cho cả 2 ô input
+    // Lắng nghe sự kiện: Ẩn/hiện mật khẩu cho cả 2 ô nhập mật khẩu
     const cacNutMat = formDangKy.querySelectorAll('.eye-toggle');
     cacNutMat.forEach(nut => {
         nut.addEventListener('click', function () {
@@ -114,9 +109,9 @@ if (formDangKy) {
         });
     });
 
-    // Event Listener: Kiểm tra dữ liệu khi submit form đăng ký
+    // Lắng nghe sự kiện: Kiểm tra dữ liệu khi gửi form đăng ký
     formDangKy.addEventListener('submit', function (e) {
-        e.preventDefault(); // Ngăn submit mặc định
+        e.preventDefault(); // Ngăn gửi form mặc định
 
         const username = oUsername.value.trim();
         const fullName = oFullName.value.trim();
@@ -126,7 +121,7 @@ if (formDangKy) {
         const password = oPass.value.trim();
         const confirmPassword = oConfirmPass.value.trim();
 
-        // Reset tất cả thông báo lỗi cũ
+        // Xóa tất cả thông báo lỗi cũ
         const cacTheLoi = formDangKy.querySelectorAll('.form-error');
         cacTheLoi.forEach(theLoi => {
             theLoi.textContent = '';
@@ -134,7 +129,7 @@ if (formDangKy) {
 
         let hopLe = true;
 
-        // 1. Kiểm tra Username (bắt buộc, không chứa khoảng trắng)
+        // 1. Kiểm tra Tên đăng nhập (bắt buộc, không chứa khoảng trắng)
         if (username === '') {
             oUsername.parentElement.querySelector('.form-error').textContent = 'Vui lòng nhập tên đăng nhập.';
             hopLe = false;
@@ -149,7 +144,7 @@ if (formDangKy) {
             hopLe = false;
         }
 
-        // 3. Kiểm tra Email bằng Biểu thức chính quy (Regular Expression)
+        // 3. Kiểm tra Email bằng Biểu thức chính quy
         const mauEmail = /^\S+@\S+\.\S+$/;
         if (email === '') {
             oEmail.parentElement.querySelector('.form-error').textContent = 'Vui lòng nhập email.';
@@ -159,7 +154,7 @@ if (formDangKy) {
             hopLe = false;
         }
 
-        // 4. Kiểm tra Số điện thoại (Regex: 10 chữ số, bắt đầu bằng 0)
+        // 4. Kiểm tra Số điện thoại (10 chữ số, bắt đầu bằng số 0)
         const mauSDT = /^0\d{9}$/;
         if (phone === '') {
             oPhone.parentElement.querySelector('.form-error').textContent = 'Vui lòng nhập số điện thoại.';
@@ -193,7 +188,7 @@ if (formDangKy) {
             hopLe = false;
         }
 
-        // 8. Kiểm tra Checkbox đồng ý điều khoản
+        // 8. Kiểm tra Ô đánh dấu đồng ý điều khoản
         if (!oAgree.checked) {
             oAgree.parentElement.parentElement.querySelector('.form-error').textContent = 'Bạn cần đồng ý với điều khoản để đăng ký.';
             hopLe = false;
@@ -201,7 +196,7 @@ if (formDangKy) {
 
         if (!hopLe) return;
 
-        // Đóng gói thông tin tài khoản thành Object
+        // Đóng gói thông tin tài khoản thành đối tượng
         const account = {
             username: username,
             fullName: fullName,
@@ -212,7 +207,7 @@ if (formDangKy) {
             isLoggedIn: false
         };
 
-        // Lưu thông tin người dùng vào Web Storage (localStorage)
+        // Lưu thông tin người dùng vào localStorage
         localStorage.setItem('account', JSON.stringify(account));
         alert('Đăng ký tài khoản thành công! Vui lòng đăng nhập.');
         location.href = 'login.html'; // Chuyển trang đăng nhập

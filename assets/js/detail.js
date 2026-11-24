@@ -1,15 +1,11 @@
 /*
- * @File: detail.js - Product Detail & Add to Cart using URL Query Strings & localStorage
- * @Module: CT188 - Nhập môn Lập trình Web
- * Trường Công nghệ Thông tin & Truyền thông - Đại học Cần Thơ (CTU)
- * Giảng viên hướng dẫn: ThS. GVC. Vũ Duy Linh
- * Đồ án: Website Cửa hàng Mắt kính An Phát
+ * @File: detail.js - Chi tiết sản phẩm & Thêm vào giỏ hàng
  */
 
-// ///// 1. DOM Traversal: Lấy các phần tử hiển thị /////
-const linkDanhMuc = document.querySelector('#WebCategory'); // Breadcrumb category link
-const detailCurrent = document.querySelector('.detail__current'); // Breadcrumb current item
-const khungChiTiet = document.querySelector('.detail-box'); // Container chính
+// ///// 1. Duyệt cây DOM: Lấy các phần tử hiển thị /////
+const linkDanhMuc = document.querySelector('#WebCategory'); // Liên kết danh mục trên thanh điều hướng
+const detailCurrent = document.querySelector('.detail__current'); // Tên sản phẩm hiện tại trên thanh điều hướng
+const khungChiTiet = document.querySelector('.detail-box'); // Khung chứa nội dung chi tiết
 
 // ///// 2. Hàm tiện ích: Chuyển đổi mã danh mục thành tên tiếng Việt /////
 function doiTenDanhMuc(maLoai) {
@@ -20,9 +16,9 @@ function doiTenDanhMuc(maLoai) {
     return 'Sản phẩm';
 }
 
-// ///// 3. Hàm hiển thị chi tiết sản phẩm (Client-Side Rendering từ URL) /////
+// ///// 3. Hàm hiển thị chi tiết sản phẩm từ tham số URL /////
 function showDetail() {
-    // Trích xuất tham số từ URL Query String (URL API / window.location.search)
+    // Trích xuất tham số từ URL Query String (URLSearchParams)
     const thamSoURL = new URLSearchParams(window.location.search);
 
     const sp = {
@@ -41,14 +37,14 @@ function showDetail() {
     }
 
     const tenLoai = doiTenDanhMuc(sp.category);
-    const giaChuoi = sp.price.toLocaleString('vi-VN') + 'đ'; // Format tiền tệ
+    const giaChuoi = sp.price.toLocaleString('vi-VN') + 'đ'; // Định dạng tiền tệ VNĐ
 
-    // Cập nhật breadcrumb navigation
+    // Cập nhật thanh điều hướng (breadcrumb)
     linkDanhMuc.textContent = tenLoai;
     linkDanhMuc.href = 'shop.html?category=' + encodeURIComponent(sp.category);
     detailCurrent.textContent = sp.name;
 
-    // ///// DOM Manipulation: Tạo cột bên trái (Hình ảnh sản phẩm) /////
+    // ///// Thao tác DOM: Tạo cột bên trái (Hình ảnh sản phẩm) /////
     const cotTrai = document.createElement('div');
     cotTrai.classList.add('detail-left');
 
@@ -58,7 +54,7 @@ function showDetail() {
     img.classList.add('detail-img');
     cotTrai.appendChild(img);
 
-    // ///// DOM Manipulation: Tạo cột bên phải (Thông tin chi tiết) /////
+    // ///// Thao tác DOM: Tạo cột bên phải (Thông tin chi tiết) /////
     const cotPhai = document.createElement('div');
     cotPhai.classList.add('detail-right');
 
@@ -86,7 +82,7 @@ function showDetail() {
     giaSP.textContent = giaChuoi;
     cotPhai.appendChild(giaSP);
 
-    // Bảng thông số sản phẩm (Table Component)
+    // Bảng thông số sản phẩm
     const bangThongTin = document.createElement('table');
     bangThongTin.classList.add('info-table');
     const tbody = document.createElement('tbody');
@@ -134,7 +130,7 @@ function showDetail() {
     nutCong.type = 'button';
     nutCong.textContent = '+';
 
-    // Event listener: Giảm số lượng (tối thiểu 1)
+    // Xử lý sự kiện: Giảm số lượng (tối thiểu 1)
     nutTru.onclick = function () {
         if (soLuong > 1) {
             soLuong--;
@@ -142,7 +138,7 @@ function showDetail() {
         }
     };
 
-    // Event listener: Tăng số lượng
+    // Xử lý sự kiện: Tăng số lượng
     nutCong.onclick = function () {
         soLuong++;
         spanSL.textContent = soLuong;
@@ -182,14 +178,14 @@ function showDetail() {
     nhomNut.appendChild(nutMuaNgay);
     cotPhai.appendChild(nhomNut);
 
-    // Gắn 2 cột vào container chính
+    // Gắn 2 cột vào khung chính
     khungChiTiet.appendChild(cotTrai);
     khungChiTiet.appendChild(cotPhai);
 }
 
-// ///// 4. Hàm nghiệp vụ: Thêm sản phẩm vào giỏ hàng (Web Storage API) /////
+// ///// 4. Hàm nghiệp vụ: Thêm sản phẩm vào giỏ hàng (lưu vào localStorage) /////
 function themVaoGioHang(sanPham, soLuong) {
-    // Authentication check: Kiểm tra đăng nhập
+    // Kiểm tra đăng nhập
     const account = JSON.parse(localStorage.getItem('account'));
 
     if (account == null || account.isLoggedIn !== true) {
@@ -202,7 +198,7 @@ function themVaoGioHang(sanPham, soLuong) {
     let gioHangHienTai = JSON.parse(localStorage.getItem('cart')) || [];
     let daCo = false;
 
-    // trh 1: Sản phẩm đã tồn tại trong giỏ -> cập nhật số lượng
+    // Trường hợp 1: Sản phẩm đã tồn tại trong giỏ -> cập nhật số lượng
     gioHangHienTai.forEach(item => {
         if (item.id === sanPham.id) {
             item.sl += soLuong;
@@ -210,7 +206,7 @@ function themVaoGioHang(sanPham, soLuong) {
         }
     });
 
-    // trh 2: Sản phẩm chưa tồn tại trong giỏ -> thêm mới vào mảng
+    // Trường hợp 2: Sản phẩm chưa tồn tại trong giỏ -> thêm mới vào mảng
     if (!daCo) {
         gioHangHienTai.push({
             id: sanPham.id,
@@ -223,7 +219,7 @@ function themVaoGioHang(sanPham, soLuong) {
 
     // Lưu mảng giỏ hàng vào localStorage
     localStorage.setItem('cart', JSON.stringify(gioHangHienTai));
-    capNhatSoGioHang(); // Đồng bộ badge giỏ hàng ở header
+    capNhatSoGioHang(); // Đồng bộ số lượng giỏ hàng ở đầu trang
     return true;
 }
 

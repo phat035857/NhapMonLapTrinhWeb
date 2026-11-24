@@ -1,17 +1,13 @@
 /*
- * @File: theme.js - Light/Dark Mode Toggle using Web Storage (localStorage)
- * @Module: CT188 - Nhập môn Lập trình Web
- * Trường Công nghệ Thông tin & Truyền thông - Đại học Cần Thơ (CTU)
- * Giảng viên hướng dẫn: ThS. GVC. Vũ Duy Linh
- * Đồ án: Website Cửa hàng Mắt kính An Phát
+ * @File: theme.js - Chuyển đổi giao diện Sáng / Tối
  */
 
-// ///// Hàm chuyển đổi giao diện Sáng / Tối (Light / Dark Mode) /////
+// ///// Hàm chuyển đổi giao diện Sáng / Tối /////
 function ChangeMode() {
-    var element = document.body; // Nút đích: thẻ <body>
-    element.classList.toggle("dark-mode"); // Toggle class 'dark-mode'
+    var element = document.body; // Thẻ body của trang web
+    element.classList.toggle("dark-mode"); // Bật hoặc tắt lớp giao diện tối
 
-    // Lưu trạng thái theme vào Web Storage (localStorage) để duy trì khi chuyển trang
+    // Lưu trạng thái giao diện vào localStorage để duy trì khi chuyển trang
     if (element.classList.contains("dark-mode")) {
         localStorage.setItem("theme", "dark");
     } else {
@@ -19,10 +15,10 @@ function ChangeMode() {
     }
 }
 
-// ///// Khôi phục theme đã lưu khi tải trang /////
+// ///// Khôi phục giao diện đã lưu khi tải trang /////
 var myTheme = localStorage.getItem("theme");
 
-// Nếu theme đã lưu là 'dark' thì tự động thêm class 'dark-mode' vào body
+// Nếu giao diện đã lưu là tối ('dark') thì tự động thêm lớp 'dark-mode' vào thẻ body
 if (myTheme === "dark") {
     document.body.classList.add("dark-mode");
 }

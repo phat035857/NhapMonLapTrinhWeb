@@ -1,29 +1,24 @@
 /*
- * @File: cart.js - Shopping Cart using localStorage & DOM Manipulation
- * @Module: CT188 - Nhập môn Lập trình Web
- * Trường Công nghệ Thông tin & Truyền thông - Đại học Cần Thơ (CTU)
- * Giảng viên hướng dẫn: ThS. GVC. Vũ Duy Linh
- * Đồ án: Website Cửa hàng Mắt kính An Phát
- * Ghi chú: Sử dụng DOM createElement thay cho innerHTML để tối ưu hiệu năng và an toàn mã nguồn
+ * @File: cart.js - Quản lý giỏ hàng
  */
 
-// ///// 1. Hàm hiển thị giỏ hàng (Client-Side Rendering) /////
+// ///// 1. Hàm hiển thị giỏ hàng /////
 function showcart() { // được gọi khi nạp trang cart.html
-    // Lấy dữ liệu từ Web Storage (localStorage)
+    // Lấy dữ liệu giỏ hàng từ localStorage
     let gioHangHienTai = JSON.parse(localStorage.getItem('cart'));
 
-    // Kiểm tra nếu giỏ hàng rỗng (null hoặc length === 0)
+    // Kiểm tra nếu giỏ hàng rỗng (chưa có hoặc không có phần tử)
     if (gioHangHienTai == null || gioHangHienTai.length === 0) {
         alert("Giỏ hàng hiện tại đang trống.");
         return; // Dừng thực thi
     }
 
-    // DOM Traversal: Lấy các nút đích trong bảng
-    const tlhead = document.querySelector('.list-head'); // <thead>
-    const tlbody = document.querySelector('.list-body'); // <tbody>
-    const tlfooter = document.querySelector('.list-foot'); // <tfoot>
+    // Duyệt cây DOM: Lấy các phần tử trong bảng
+    const tlhead = document.querySelector('.list-head'); // Thẻ thead (tiêu đề cột)
+    const tlbody = document.querySelector('.list-body'); // Thẻ tbody (danh sách sản phẩm)
+    const tlfooter = document.querySelector('.list-foot'); // Thẻ tfoot (tổng tiền)
 
-    // DOM Manipulation: Tạo hàng tiêu đề bảng
+    // Thao tác DOM: Tạo hàng tiêu đề bảng
     const trhead = document.createElement('tr');
     const dsCot = ['STT', 'Hình ảnh', 'Tên sản phẩm', 'Số lượng', 'Thành tiền', 'Xóa'];
 
@@ -41,7 +36,7 @@ function showcart() { // được gọi khi nạp trang cart.html
         const thanhTien = i.sl * i.price; // Thành tiền = số lượng * đơn giá
         tong += thanhTien; // Cộng dồn tổng tiền
 
-        const tr = document.createElement('tr'); // Tạo row mới
+        const tr = document.createElement('tr'); // Tạo dòng mới
 
         // Cột 1: STT
         const tdso = document.createElement('td');
@@ -70,15 +65,15 @@ function showcart() { // được gọi khi nạp trang cart.html
         const sl = document.createElement('span');
         sl.textContent = i.sl;
 
-        // Cột 5: Thành tiền (tạo trước để truyền vào callback của nút +/-)
+        // Cột 5: Thành tiền (tạo trước để truyền vào hàm của nút +/-)
         const tdTien = document.createElement('td');
-        tdTien.textContent = thanhTien.toLocaleString('vi-VN') + 'đ'; // Format tiền tệ VNĐ
+        tdTien.textContent = thanhTien.toLocaleString('vi-VN') + 'đ'; // Định dạng tiền tệ VNĐ
 
         // Nút trừ (-)
         const nutTru = document.createElement('button');
         nutTru.type = 'button';
         nutTru.textContent = '-';
-        // Callback function: cập nhật DOM trực tiếp không reload
+        // Cập nhật DOM trực tiếp không tải lại trang
         nutTru.onclick = function () {
             doiSoLuong(i.id, -1, sl, tdTien);
         };
@@ -87,7 +82,7 @@ function showcart() { // được gọi khi nạp trang cart.html
         const nutCong = document.createElement('button');
         nutCong.type = 'button';
         nutCong.textContent = '+';
-        // Callback function: cập nhật DOM trực tiếp không reload
+        // Cập nhật DOM trực tiếp không tải lại trang
         nutCong.onclick = function () {
             doiSoLuong(i.id, 1, sl, tdTien);
         };
@@ -106,18 +101,18 @@ function showcart() { // được gọi khi nạp trang cart.html
         Dele.classList.add('btn-dele');
         Dele.type = 'button';
         Dele.textContent = 'Xóa';
-        // Callback function: xóa row tương ứng khỏi DOM Tree
+        // Xóa dòng tương ứng khỏi cây DOM
         Dele.onclick = function () {
             xoaSanPham(i.id, tr);
         };
         tdDele.appendChild(Dele);
         tr.appendChild(tdDele);
 
-        // Thêm row vào tbody
+        // Thêm dòng vào tbody
         tlbody.appendChild(tr);
     });
 
-    // ///// DOM Manipulation: Tạo các hàng tổng kết ở tfoot /////
+    // ///// Thao tác DOM: Tạo các hàng tổng kết ở chân bảng (tfoot) /////
     // Dòng Tổng cộng
     const tr = document.createElement('tr');
     const td1 = document.createElement('td');
@@ -172,7 +167,7 @@ function showcart() { // được gọi khi nạp trang cart.html
     tlfooter.appendChild(trThanhTien);
 }
 
-// ///// 2. Hàm nghiệp vụ: Cập nhật cụm tổng tiền ở tfoot /////
+// ///// 2. Hàm nghiệp vụ: Cập nhật cụm tổng tiền ở chân bảng (tfoot) /////
 function capNhatTongTien() {
     const gioHangHienTai = JSON.parse(localStorage.getItem('cart')) || [];
     let tong = 0;
@@ -185,7 +180,7 @@ function capNhatTongTien() {
     const thueVAT = Math.floor(tong * 0.1);
     const tongThanhToan = tong + thueVAT;
 
-    // Cập nhật textContent trực tiếp vào 3 ô .total-value trong tfoot (không cần id thừa, không reload trang)
+    // Cập nhật nội dung trực tiếp vào 3 ô .total-value trong tfoot (không cần id thừa, không tải lại trang)
     const cacO = document.querySelectorAll('.list-foot .total-value');
     if (cacO.length >= 3) {
         cacO[0].textContent = tong.toLocaleString('vi-VN') + 'đ';
@@ -193,7 +188,7 @@ function capNhatTongTien() {
         cacO[2].textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
     }
 
-    // Đồng bộ số lượng trên icon giỏ hàng ở header
+    // Đồng bộ số lượng trên biểu tượng giỏ hàng ở đầu trang
     capNhatSoGioHang();
 }
 
@@ -203,10 +198,10 @@ function doiSoLuong(idSanPham, thayDoi, slEl, tdTienEl) {
 
     gioHangHienTai.forEach(item => {
         if (item.id === idSanPham) {
-            // Điều kiện biên: số lượng tối thiểu là 1
+            // Điều kiện an toàn: số lượng tối thiểu là 1
             if (item.sl + thayDoi >= 1) {
                 item.sl += thayDoi;
-                // Cập nhật DOM trực tiếp tại node đích
+                // Cập nhật DOM trực tiếp tại phần tử đích
                 slEl.textContent = item.sl;
                 tdTienEl.textContent = (item.sl * item.price).toLocaleString('vi-VN') + 'đ';
             }
@@ -236,7 +231,7 @@ function xoaSanPham(idSanPham, trEl) {
     // Thao tác DOM: Xóa dòng tr tương ứng khỏi cây DOM
     trEl.remove();
 
-    // trh 1: Giỏ hàng trống sau khi xóa
+    // Trường hợp 1: Giỏ hàng trống sau khi xóa
     if (dsMoi.length === 0) {
         document.querySelector('.list-head').textContent = '';
         document.querySelector('.list-body').textContent = '';
@@ -246,25 +241,25 @@ function xoaSanPham(idSanPham, trEl) {
         return;
     }
 
-    // trh 2: Cập nhật lại STT cho các dòng còn lại trong tbody
+    // Trường hợp 2: Cập nhật lại STT cho các dòng còn lại trong tbody
     const cacDong = document.querySelectorAll('.list-body tr');
     cacDong.forEach((dong, idx) => {
-        dong.children[0].textContent = idx + 1; // Nút đích: td đầu tiên
+        dong.children[0].textContent = idx + 1; // Phần tử đích: ô td đầu tiên
     });
 
     capNhatTongTien(); // Tính lại tổng tiền
 }
 
-// ///// 5. Event Listener: Xử lý nút Đặt hàng (#btnOrder) /////
+// ///// 5. Lắng nghe sự kiện: Xử lý nút Đặt hàng (#btnOrder) /////
 const nutDatHang = document.querySelector('#btnOrder');
 if (nutDatHang) {
     nutDatHang.addEventListener('click', function () {
-        // Kiểm tra xác thực người dùng (Authentication check)
+        // Kiểm tra trạng thái đăng nhập của người dùng
         const account = JSON.parse(localStorage.getItem('account'));
 
         if (account == null || account.isLoggedIn !== true) {
             alert('Vui lòng đăng nhập để đặt hàng!');
-            location.href = 'login.html'; // Chuyển hướng trang
+            location.href = 'login.html'; // Chuyển sang trang đăng nhập
             return;
         }
 
@@ -275,7 +270,7 @@ if (nutDatHang) {
             return;
         }
 
-        // Đặt hàng thành công: xóa dữ liệu giỏ hàng và điều hướng
+        // Đặt hàng thành công: xóa dữ liệu giỏ hàng và điều hướng về trang chủ
         alert('Đặt hàng thành công!');
         localStorage.removeItem('cart'); // Xóa giỏ hàng
         location.href = 'index.html'; // Chuyển về trang chủ

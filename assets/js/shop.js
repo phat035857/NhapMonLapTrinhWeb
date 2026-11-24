@@ -1,13 +1,8 @@
 /*
- * @File: shop.js - Product Catalog, Filtering, Searching & Add to Cart
- * @Module: CT188 - Nhập môn Lập trình Web
- * Trường Công nghệ Thông tin & Truyền thông - Đại học Cần Thơ (CTU)
- * Giảng viên hướng dẫn: ThS. GVC. Vũ Duy Linh
- * Đồ án: Website Cửa hàng Mắt kính An Phát
- * Ghi chú: Kỹ thuật DOM Filtering, URL Query Strings và xử lý Event Bubbling (stopPropagation)
+ * @File: shop.js - Danh mục sản phẩm, Lọc & Tìm kiếm
  */
 
-// ///// 1. DOM Traversal: Lấy các phần tử bộ lọc và danh sách sản phẩm /////
+// ///// 1. Duyệt cây DOM: Lấy các phần tử bộ lọc và danh sách sản phẩm /////
 const tieuDeShop = document.querySelector('#pageTitle');
 const oLocGia = document.querySelector('#price');
 const khungSanPham = document.querySelector('.shop-grid');
@@ -16,7 +11,7 @@ const oTimKiem = document.querySelector('#search');
 const dsNutThemGio = document.querySelectorAll('.add-cart-btn');
 const dsTheShop = document.querySelectorAll('.shop-card');
 
-// ///// 2. Hàm trích xuất danh mục từ URL API (window.location.search) /////
+// ///// 2. Hàm trích xuất mã danh mục từ URL /////
 function layDanhMucURL() {
     const thamSoURL = new URLSearchParams(window.location.search);
     return thamSoURL.get('category') || '';
@@ -43,7 +38,7 @@ function locSanPham() {
     const data = document.querySelectorAll('.shop-card');
     doiTieuDe(loai);
 
-    // Duyệt danh sách sản phẩm: ẩn/hiện bằng class 'hidden'
+    // Duyệt danh sách sản phẩm: ẩn/hiện bằng lớp class 'hidden'
     data.forEach((e) => {
         const currloai = e.getAttribute('data-category');
         if (currloai === loai || loai === '') {
@@ -83,14 +78,14 @@ function locTheoGia() {
     });
 }
 
-// ///// 6. Hàm Reset bộ lọc về giá trị mặc định /////
+// ///// 6. Hàm Đặt lại bộ lọc về giá trị mặc định /////
 function nuReset() {
     oLocGia.selectedIndex = 0;
     oTimKiem.value = '';
     locTheoGia();
 }
 
-// ///// 7. Hàm nghiệp vụ: Tìm kiếm realtime kết hợp bộ lọc /////
+// ///// 7. Hàm nghiệp vụ: Tìm kiếm trực tiếp kết hợp bộ lọc /////
 function timKiemSanPham() {
     const loai = layDanhMucURL();
     const mucGia = oLocGia.value;
@@ -114,7 +109,7 @@ function timKiemSanPham() {
     });
 }
 
-// ///// 8. Hàm trích xuất dữ liệu sản phẩm từ DOM Node /////
+// ///// 8. Hàm trích xuất dữ liệu sản phẩm từ thẻ DOM /////
 function docThongTinThe(the) {
     return {
         id: the.getAttribute('data-id'),
@@ -125,13 +120,13 @@ function docThongTinThe(the) {
     };
 }
 
-// ///// 9. Event Listener: Xử lý Thêm nhanh vào giỏ hàng /////
+// ///// 9. Lắng nghe sự kiện: Xử lý Thêm nhanh vào giỏ hàng /////
 dsNutThemGio.forEach(function (nutGio) {
     nutGio.addEventListener('click', function (suKien) {
-        // Ngăn chặn nổi bọt sự kiện (Event Bubbling) lên thẻ cha .shop-card
+        // Ngăn chặn nổi bọt sự kiện lên thẻ cha (không kích hoạt xem chi tiết)
         suKien.stopPropagation();
 
-        // Authentication check: Kiểm tra đăng nhập
+        // Kiểm tra trạng thái đăng nhập
         const account = JSON.parse(localStorage.getItem('account'));
 
         if (account == null || account.isLoggedIn !== true) {
@@ -140,7 +135,7 @@ dsNutThemGio.forEach(function (nutGio) {
             return;
         }
 
-        // DOM Traversal ngược lên thẻ cha để lấy thông tin sản phẩm
+        // Lấy thông tin từ thẻ sản phẩm chứa nút này
         const theSanPham = nutGio.parentElement.parentElement;
         const sanPhamMoi = docThongTinThe(theSanPham);
         const gioHang = JSON.parse(localStorage.getItem('cart')) || [];
@@ -150,11 +145,11 @@ dsNutThemGio.forEach(function (nutGio) {
             return monHang.id === sanPhamMoi.id;
         });
 
-        // trh 1: Sản phẩm đã có trong giỏ -> tăng số lượng
+        // Trường hợp 1: Sản phẩm đã có trong giỏ -> tăng số lượng
         if (sanPhamCoSan) {
             sanPhamCoSan.sl += 1;
         } else {
-            // trh 2: Sản phẩm chưa có trong giỏ -> thêm mới
+            // Trường hợp 2: Sản phẩm chưa có trong giỏ -> thêm mới
             sanPhamMoi.sl = 1;
             gioHang.push(sanPhamMoi);
         }
@@ -166,7 +161,7 @@ dsNutThemGio.forEach(function (nutGio) {
     });
 });
 
-// ///// 10. Event Listener: Click thẻ sản phẩm -> Chuyển sang trang chi tiết /////
+// ///// 10. Lắng nghe sự kiện: Nhấn vào thẻ sản phẩm để chuyển sang trang chi tiết /////
 dsTheShop.forEach(function (the) {
     the.addEventListener('click', function () {
         const spChon = docThongTinThe(the);
@@ -174,7 +169,7 @@ dsTheShop.forEach(function (the) {
     });
 });
 
-// ///// 11. Đăng ký các sự kiện tương tác /////
+// ///// 11. Đăng ký các sự kiện tương tác bộ lọc /////
 nutDatLai.addEventListener('click', nuReset);
 oLocGia.addEventListener('change', locTheoGia);
 oTimKiem.addEventListener('input', timKiemSanPham);
