@@ -1,7 +1,7 @@
 function showcart() {
     //Lấy dữ liệu từ localStorage
     let gioHangHienTai = JSON.parse(localStorage.getItem('cart'));
-    //Nếu chưa có(NULL) hoặc rỗng (độ dài = 0) thì ghi ra giỏ hàng trống và chuyển về index
+    //Nếu chưa có(NULL) hoặc rỗng (độ dài = 0) thì ghi ra giỏ hàng trống
     if (gioHangHienTai == null || gioHangHienTai.length === 0) {
         alert("Giỏ hàng hiện tại đang trống.");
         return;
@@ -12,7 +12,7 @@ function showcart() {
     const tlfooter = document.querySelector('.list-foot');
 
     const trhead = document.createElement('tr');
-    //Tạo mảng cách cái cột cần thiết
+    //Tạo mảng các cột cần thiết
     const dsCot = ['STT', 'Hình ảnh', 'Tên sản phẩm', 'Số lượng', 'Thành tiền', 'Xóa'];
     //tạo từng cột
     dsCot.forEach(tungCot => {
@@ -37,7 +37,7 @@ function showcart() {
         tdso.textContent = ++so;
         tr.appendChild(tdso);
 
-        //Tạo cột hỉnh ảnh cho sản phẩm thứ i
+        //Tạo cột hình ảnh cho sản phẩm thứ i
         const tdHA = document.createElement('td');
         const img = document.createElement('img');
         img.src = i.image;
@@ -46,7 +46,7 @@ function showcart() {
         tdHA.appendChild(img);
         tr.appendChild(tdHA);
 
-        //Tạo cột tên cho sản phầm thứ i
+        //Tạo cột tên cho sản phẩm thứ i
         const tdten = document.createElement('td');
         tdten.textContent = i.name;
         tr.appendChild(tdten);
@@ -56,20 +56,26 @@ function showcart() {
         const divqsl = document.createElement('div');
         divqsl.classList.add('qlsl');
 
-        //Tạo các nút cộng,trừ 
+        const sl = document.createElement('span');
+        sl.textContent = i.sl;
+
+        //tạo cột thành tiền và dùng hàm có sẵn toLocaleString() để định dạng về Việt Nam
+        const tdTien = document.createElement('td');
+        tdTien.textContent = thanhTien.toLocaleString('vi-VN') + 'đ';
+
+        //Tạo các nút cộng, trừ
         const nutTru = document.createElement('button');
         nutTru.type = 'button';
         nutTru.textContent = '-';
         nutTru.onclick = function () {
-            doiSoLuong(i.id, -1);
+            doiSoLuong(i.id, -1, sl, tdTien);
         };
-        const sl = document.createElement('span');
-        sl.textContent = i.sl;
+
         const nutCong = document.createElement('button');
         nutCong.type = 'button';
         nutCong.textContent = '+';
         nutCong.onclick = function () {
-            doiSoLuong(i.id, 1);
+            doiSoLuong(i.id, 1, sl, tdTien);
         };
 
         divqsl.appendChild(nutTru);
@@ -77,10 +83,6 @@ function showcart() {
         divqsl.appendChild(nutCong);
         tdsl.appendChild(divqsl);
         tr.appendChild(tdsl);
-
-        //tạo cột thành tiền và dùng hàm có sẵn toLocaleString() để định dạng về Việt Nam
-        const tdTien = document.createElement('td');
-        tdTien.textContent = thanhTien.toLocaleString('vi-VN') + 'đ';
         tr.appendChild(tdTien);
 
         //Tạo cột xóa 
@@ -90,11 +92,11 @@ function showcart() {
         Dele.type = 'button';
         Dele.textContent = 'Xóa';
         Dele.onclick = function () {
-            xoaSanPham(i.id);
+            xoaSanPham(i.id, tr);
         };
         tdDele.appendChild(Dele);
         tr.appendChild(tdDele);
-        //Thêm các vừa tạo vào tbody để hiện thị
+        //Thêm dòng vừa tạo vào tbody để hiển thị
         tlbody.appendChild(tr);
     });
 
@@ -107,13 +109,14 @@ function showcart() {
     td1.textContent = 'Tổng cộng:';
 
     const td2 = document.createElement('td');
+    td2.id = 'tongCong';
     td2.classList.add('total-value');
     td2.textContent = tong.toLocaleString('vi-VN') + 'đ';
 
     const td3 = document.createElement('td');
     td3.rowSpan = 3;
 
-    //thêm vào tlfooter để hiện thị
+    //thêm vào tlfooter để hiển thị
     tr.appendChild(td1);
     tr.appendChild(td2);
     tr.appendChild(td3);
@@ -130,6 +133,7 @@ function showcart() {
     tdThueLabel.textContent = 'VAT (10%):';
 
     const tdThueValue = document.createElement('td');
+    tdThueValue.id = 'thueVAT';
     tdThueValue.classList.add('total-value');
     tdThueValue.textContent = thueVAT.toLocaleString('vi-VN') + 'đ';
 
@@ -145,6 +149,7 @@ function showcart() {
     tdThanhTienLabel.textContent = 'Thành tiền:';
 
     const tdThanhTienValue = document.createElement('td');
+    tdThanhTienValue.id = 'tongThanhToan';
     tdThanhTienValue.classList.add('total-value');
     tdThanhTienValue.textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
 
@@ -153,39 +158,75 @@ function showcart() {
     tlfooter.appendChild(trThanhTien);
 }
 
-//hàm tẳng giảm số lượng sản phẩm
-function doiSoLuong(idSanPham, thayDoi) {
-    //Lấy tất cả sản phẩm
+//Hàm chỉ tính và cập nhật lại 3 ô Tổng cộng, VAT, Thành tiền dưới tlfooter
+function capNhatTongTien() {
+    const gioHangHienTai = JSON.parse(localStorage.getItem('cart')) || [];
+    let tong = 0;
+
+    gioHangHienTai.forEach(item => {
+        tong += item.sl * item.price;
+    });
+
+    const thueVAT = Math.floor(tong * 0.1);
+    const tongThanhToan = tong + thueVAT;
+
+    document.querySelector('#tongCong').textContent = tong.toLocaleString('vi-VN') + 'đ';
+    document.querySelector('#thueVAT').textContent = thueVAT.toLocaleString('vi-VN') + 'đ';
+    document.querySelector('#tongThanhToan').textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
+
+    capNhatSoGioHang();
+}
+
+//Hàm tăng giảm số lượng sản phẩm trực tiếp trên DOM
+function doiSoLuong(idSanPham, thayDoi, slEl, tdTienEl) {
     let gioHangHienTai = JSON.parse(localStorage.getItem('cart')) || [];
-    //Duyệt hết tất cả sản phẩm để tìm sản phẩm cần thay đổi
+
     gioHangHienTai.forEach(item => {
         if (item.id === idSanPham) {
             if (item.sl + thayDoi >= 1) {
                 item.sl += thayDoi;
+                slEl.textContent = item.sl;
+                tdTienEl.textContent = (item.sl * item.price).toLocaleString('vi-VN') + 'đ';
             }
         }
     });
-    //Đặt lại vào localstorage để hiện thị lại lên màng hình của khách hàng
+
     localStorage.setItem('cart', JSON.stringify(gioHangHienTai));
-    location.reload();
+    capNhatTongTien();
 }
 
-//hàm xóa sản phẩm cho nút dele đã tạo ở trên
-function xoaSanPham(idSanPham) {
-    //tạo mảng mới rỗng
+//Hàm xóa sản phẩm trực tiếp trên DOM
+function xoaSanPham(idSanPham, trEl) {
     let dsMoi = [];
     let gioHangHienTai = JSON.parse(localStorage.getItem('cart')) || [];
-    //duyệt hết tất cả sản phẩm và thêm tất cả sản phầm KHÔNG bị xóa mảng mới
+
     gioHangHienTai.forEach(item => {
         if (item.id !== idSanPham) {
             dsMoi.push(item);
         }
     });
-    //đặt lại vào localstorage để hiện thị
+
     localStorage.setItem('cart', JSON.stringify(dsMoi));
-    //reload để chạy lại trang ko gọi làm hàm showcart là vì nó sẽ tạo thêm 1 cái tlhead 
-    location.reload();
+    trEl.remove();
+
+    if (dsMoi.length === 0) {
+        document.querySelector('.list-head').textContent = '';
+        document.querySelector('.list-body').textContent = '';
+        document.querySelector('.list-foot').textContent = '';
+        capNhatSoGioHang();
+        alert("Giỏ hàng hiện tại đang trống.");
+        return;
+    }
+
+    //Cập nhật lại STT cho các dòng còn lại
+    const cacDong = document.querySelectorAll('.list-body tr');
+    cacDong.forEach((dong, idx) => {
+        dong.children[0].textContent = idx + 1;
+    });
+
+    capNhatTongTien();
 }
+
 //Tìm tới nút đặt hàng
 const nutDatHang = document.querySelector('#btnOrder');
 if (nutDatHang) {
@@ -204,11 +245,11 @@ if (nutDatHang) {
             alert('Giỏ hàng của bạn đang trống, vui lòng chọn sản phẩm trước khi đặt hàng!');
             return;
         }
-        //nếu được click vào thì xóa khỏi localstorage coi như đặt hàng thành côngvaf
         alert('Đặt hàng thành công!');
         localStorage.removeItem('cart');
         location.href = 'index.html';
     });
 }
-//Chạy hàm này lần đầu vào web để hiện thị các sản phẩm khách hàng đã thêm vào cart
+
+//Chạy hàm này lần đầu vào web để hiển thị các sản phẩm khách hàng đã thêm vào cart
 showcart();
