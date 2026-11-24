@@ -126,7 +126,6 @@ function showcart() { // được gọi khi nạp trang cart.html
     td1.textContent = 'Tổng cộng:';
 
     const td2 = document.createElement('td');
-    td2.id = 'tongCong'; // Gán ID để truy xuất cập nhật sau này
     td2.classList.add('total-value');
     td2.textContent = tong.toLocaleString('vi-VN') + 'đ';
 
@@ -150,7 +149,6 @@ function showcart() { // được gọi khi nạp trang cart.html
     tdThueLabel.textContent = 'VAT (10%):';
 
     const tdThueValue = document.createElement('td');
-    tdThueValue.id = 'thueVAT'; // Gán ID để truy xuất cập nhật
     tdThueValue.classList.add('total-value');
     tdThueValue.textContent = thueVAT.toLocaleString('vi-VN') + 'đ';
 
@@ -166,7 +164,6 @@ function showcart() { // được gọi khi nạp trang cart.html
     tdThanhTienLabel.textContent = 'Thành tiền:';
 
     const tdThanhTienValue = document.createElement('td');
-    tdThanhTienValue.id = 'tongThanhToan'; // Gán ID để truy xuất cập nhật
     tdThanhTienValue.classList.add('total-value');
     tdThanhTienValue.textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
 
@@ -188,10 +185,13 @@ function capNhatTongTien() {
     const thueVAT = Math.floor(tong * 0.1);
     const tongThanhToan = tong + thueVAT;
 
-    // Cập nhật textContent trực tiếp vào nút đích (không reload trang)
-    document.querySelector('#tongCong').textContent = tong.toLocaleString('vi-VN') + 'đ';
-    document.querySelector('#thueVAT').textContent = thueVAT.toLocaleString('vi-VN') + 'đ';
-    document.querySelector('#tongThanhToan').textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
+    // Cập nhật textContent trực tiếp vào 3 ô .total-value trong tfoot (không cần id thừa, không reload trang)
+    const cacO = document.querySelectorAll('.list-foot .total-value');
+    if (cacO.length >= 3) {
+        cacO[0].textContent = tong.toLocaleString('vi-VN') + 'đ';
+        cacO[1].textContent = thueVAT.toLocaleString('vi-VN') + 'đ';
+        cacO[2].textContent = tongThanhToan.toLocaleString('vi-VN') + 'đ';
+    }
 
     // Đồng bộ số lượng trên icon giỏ hàng ở header
     capNhatSoGioHang();

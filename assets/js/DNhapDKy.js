@@ -18,7 +18,7 @@ if (formDangNhap) {
     const oTaiKhoan = document.querySelector('#loginUser');
     const oMatKhau = document.querySelector('#loginPassword');
     const nutMat = document.querySelector('.eye-toggle');
-    const iconMat = document.querySelector('#eyeIcon');
+    const iconMat = nutMat.querySelector('i');
 
     // Event Listener: Bật/tắt hiển thị mật khẩu (Password Toggle)
     nutMat.addEventListener('click', function () {
