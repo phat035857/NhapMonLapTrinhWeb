@@ -101,12 +101,15 @@ main {
     background-color: #2AD0CC;
     display: block;
     position: static;
-    width: 40px;
+    width: 0;
     height: 3px;
-    margin: 12px 0;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 12px auto;
     border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.header__navform--nav li:hover::after {
+    width: 40px;
 }
 
 .header__navform--nav a {
@@ -218,12 +221,17 @@ main {
     float: left;
     width: 33.33%;
     padding: 0 20px;
+    text-align:  center;
 }
 
 .footer-container::after { 
     content: "";
     display: block;
     clear: both;
+}
+
+.footer__danhsach li a:hover{
+    color: #2DD4BF;
 }
 
 .footer__h4 {
@@ -240,7 +248,7 @@ main {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 40px;
+    width: 100%;
     height: 2px;
     background-color: #2AD0CC;
 }
@@ -276,10 +284,8 @@ main {
 }
 
 .footer__mangxahoi a:hover {
-    background-color: #2AD0CC;
-    border-color: #2AD0CC;
-    border-radius: 15px;
-    color: #fff;
+    color: #2AD0CC;
+
 }
 
 .footer__danhsach {
@@ -405,6 +411,9 @@ main {
     }
 
     .header__navform--nav li::after {
+        width: 100%;
+    }
+    .header__navform--nav li:hover::after {
         width: 100%;
     }
     .theme-toggle__actions {
