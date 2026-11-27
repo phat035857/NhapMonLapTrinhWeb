@@ -40,7 +40,7 @@ function locSanPham() {
 
     // Duyệt danh sách sản phẩm: ẩn/hiện bằng lớp class 'hidden'
     data.forEach((e) => {
-        const currloai = e.getAttribute('data-category');
+        const currloai = e.querySelectorAll('p.hidden')[0].textContent.trim();
         if (currloai === loai || loai === '') {
             e.classList.remove('hidden');
         } else {
@@ -64,8 +64,9 @@ function locTheoGia() {
     const danhSachSanPham = document.querySelectorAll('.shop-card');
 
     danhSachSanPham.forEach(function (the) {
-        const loaiThe = the.getAttribute('data-category');
-        const gia = the.querySelector('.shop-card__current-price').getAttribute('data-price');
+        const dsAn = the.querySelectorAll('p.hidden');
+        const loaiThe = dsAn[0].textContent.trim();
+        const gia = dsAn[2].textContent.trim();
 
         const dungLoai = (loai === '' || loaiThe === loai);
         const dungGia = kiemTraGia(gia, mucGia);
@@ -93,8 +94,9 @@ function timKiemSanPham() {
     const dsThe = khungSanPham.querySelectorAll('.shop-card');
 
     dsThe.forEach(function (the) {
-        const loaiThe = the.getAttribute('data-category');
-        const giaThe = the.querySelector('.shop-card__current-price').getAttribute('data-price');
+        const dsAn = the.querySelectorAll('p.hidden');
+        const loaiThe = dsAn[0].textContent.trim();
+        const giaThe = dsAn[2].textContent.trim();
         const tenThe = the.querySelector('.shop-card__title').textContent.trim().toLowerCase();
 
         const dungLoai = (loai === '' || loaiThe === loai);
@@ -111,11 +113,13 @@ function timKiemSanPham() {
 
 // ///// 8. Hàm trích xuất dữ liệu sản phẩm từ thẻ DOM /////
 function docThongTinThe(the) {
+            // Danh sách dữ liệu ẩn (dữ liệu bị ẩn đị)
+    const dsAn = the.querySelectorAll('p.hidden');
     return {
-        id: the.getAttribute('data-id'),
-        category: the.getAttribute('data-category'),
+        id: dsAn[1].textContent.trim(),
+        category: dsAn[0].textContent.trim(),
         name: the.querySelector('.shop-card__title').textContent.trim(),
-        price: Number(the.querySelector('.shop-card__current-price').getAttribute('data-price')),
+        price: Number(dsAn[2].textContent.trim()),
         image: the.querySelector('.shop-card__img').getAttribute('src')
     };
 }

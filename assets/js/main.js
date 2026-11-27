@@ -5,7 +5,7 @@
 // ///// 1. Duyệt cây DOM: Lấy các phần tử dùng chung trên phần đầu trang & Trang chủ /////
 const thanhDieuHuong = document.querySelector('.header__navform'); // Thanh điều hướng menu
 const nutMenu = document.querySelector('.hamburger'); // Biểu tượng menu trên điện thoại
-const cacLinkWeb = document.querySelectorAll('a[data-category]'); // Liên kết danh mục trên menu
+const cacLinkWeb = document.querySelectorAll('.header__navform--nav a, .footer__danhsach a'); // Liên kết danh mục trên menu
 const cacLinkWebHinh = document.querySelectorAll('#danh-muc article img'); // Hình ảnh danh mục trang chủ
 const nutKhamPham = document.querySelector('.kham-pha'); // Nút khám phá trên banner
 const oSoLuongGio = document.querySelector('#cartCount'); // Biểu tượng số lượng giỏ hàng
@@ -84,12 +84,12 @@ function chuyenTrangShop(loai) {
 // ///// 6. Hàm tiện ích: Chuyển sang trang xem chi tiết sản phẩm /////
 function chuyenTrangChiTiet(sp) {
     // Đóng gói dữ liệu sản phẩm vào tham số URL
-    const url = 'detail.html?' +
-        'id=' + encodeURIComponent(sp.id) +
-        '&category=' + encodeURIComponent(sp.category) +
-        '&name=' + encodeURIComponent(sp.name) +
-        '&price=' + encodeURIComponent(sp.price) +
-        '&image=' + encodeURIComponent(sp.image);
+        const url = 'detail.html?' +
+            'id=' + encodeURIComponent(sp.id) +
+            '&category=' + encodeURIComponent(sp.category) +
+            '&name=' + encodeURIComponent(sp.name) +
+            '&price=' + encodeURIComponent(sp.price) +
+            '&image=' + encodeURIComponent(sp.image);
 
     window.location.href = url;
 }
@@ -108,12 +108,13 @@ if (nutKhamPham) {
 dsBestSeller.forEach((i) => {
     i.addEventListener('click', function (e) {
         e.preventDefault();
-
+        // Danh sách dữ liệu ẩn (dữ liệu bị ẩn đị)
+        const dsAn = i.querySelectorAll('p.hidden');
         const data = {
-            id: i.getAttribute('data-id'),
-            category: i.getAttribute('data-category'),
+            id: dsAn[0].textContent.trim(),
+            category: dsAn[1].textContent.trim(),
             name: i.querySelector('figcaption').textContent.trim(),
-            price: Number(i.getAttribute('data-price')),
+            price: Number(dsAn[2].textContent.trim()),
             image: i.querySelector('img').getAttribute('src')
         };
 
@@ -124,7 +125,7 @@ dsBestSeller.forEach((i) => {
 // Nhấn vào hình ảnh danh mục trên trang chủ
 cacLinkWebHinh.forEach((e) => {
     e.addEventListener('click', function () {
-        const loai = e.getAttribute('data-category');
+        const loai = e.parentElement.querySelector('p.hidden').textContent.trim();
         chuyenTrangShop(loai);
     });
 });
@@ -133,7 +134,7 @@ cacLinkWebHinh.forEach((e) => {
 cacLinkWeb.forEach((e) => {
     e.addEventListener('click', function (evt) {
         evt.preventDefault();
-        const loai = e.getAttribute('data-category');
+        const loai = e.parentElement.querySelector('p.hidden').textContent.trim();
         chuyenTrangShop(loai);
     });
 });
